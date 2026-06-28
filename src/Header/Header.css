@@ -1,0 +1,15 @@
+.header {
+  /*  background-color: white; */
+   height: 50px;
+   display: flex;
+   justify-content: center;
+   padding-top: 10px;
+
+}  
+
+.header__title { 
+    margin-top: 0px;
+    color: black; 
+
+}
+

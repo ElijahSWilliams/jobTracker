@@ -1,0 +1,12 @@
+:root {
+    --bg: #0f172a;        /* dark navy */
+    --card: #1e293b;      /* slate */
+    --text: #e2e8f0;      /* soft white */
+    --muted: #94a3b8;     /* gray text */
+    --accent: #38bdf8;    /* blue */
+  }
+
+body {
+ background-color: aqua; 
+ margin: 0;
+}
