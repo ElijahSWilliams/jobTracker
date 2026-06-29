@@ -20,7 +20,7 @@ function Main({ }: MainProps) {
         <div className="main">
             <div className="main__header">
                 <h1 className="main__title">Stats</h1>
-                <button className="main__add-button"> + Add Job</button>
+                <button className="main__add-button">+ Add Job</button>
             </div>
 
 
