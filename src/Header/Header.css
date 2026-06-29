@@ -1,15 +1,16 @@
-.header {
-  /*  background-color: white; */
-   height: 50px;
-   display: flex;
-   justify-content: center;
-   padding-top: 10px;
+/* .header {
+background-color: white;
+display: flex; 
+flex-direction: row;
+height: 100px;
+width: 100%;
+
 
 }  
 
 .header__title { 
     margin-top: 0px;
     color: black; 
-
+    
 }
-
+ */

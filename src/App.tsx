@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import './App.css'
-import Header from './Header/Header'
+
 import Main from './Main/Main'
 import Profile from './Profile/Profile'
 import profileImage from "./assets/hero.png"
@@ -19,10 +19,8 @@ function App() {
         { label: "Interviews", value: 4 },
         { label: "Offers", value: 4 }
       ]} />
-
       <div className='app__main'>
         <Routes>
-          {/* <Header /> */}
           <Route path='/' element={<Main />} />
         </Routes>
       </div>
