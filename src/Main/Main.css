@@ -1,5 +1,6 @@
 .main {
-background-color: white; 
+background-color: transparent; 
+border: 1px solid white;
 border-radius: 30px;  
 max-width: 1000px;  
 
@@ -9,7 +10,9 @@ position: relative ;
 bottom: 20px;
 
 /* This places the main to the right */
-flex: 1; 
+flex: 1;  
+
+padding: 0px 30px;
 
 
 } 
@@ -17,7 +20,8 @@ flex: 1;
 .main__container {
 display: grid; 
 grid-template-columns: repeat(5, 1fr);
-gap: 20px;
+gap: 10px; 
+
 }
 
 .main__title {
@@ -25,8 +29,8 @@ text-align: center;
 }
 
 .main__box {
-    background: #f3f4f6;
-    height: 120px;
+    background: transparent;
+    /* height: 120px; */
   
     border: 1px solid #ddd;
     border-radius: 12px;
