@@ -1,0 +1,13 @@
+.app {
+    display: flex;
+    min-height: 100vh; 
+
+    
+}
+
+.app__main {
+flex: 1;
+display: flex;
+justify-content: center; 
+align-items: center;
+}

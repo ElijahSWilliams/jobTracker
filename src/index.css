@@ -6,7 +6,14 @@
     --accent: #38bdf8;    /* blue */
   }
 
-body {
- background-color: aqua; 
- margin: 0;
+body { 
+  margin: 0;
+  
+  background: linear-gradient(
+      135deg,
+      #2c2c2c,
+      #4a4a4a,
+      #6b6b6b,
+      #3a3a3a
+    );
 }
