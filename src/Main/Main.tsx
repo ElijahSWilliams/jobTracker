@@ -1,5 +1,17 @@
 import "./Main.css";
 
+/* PLACEHOLDER STATS */
+const stats = [
+    { label: "Saved", value: 12 },
+    { label: "Applied", value: 38 },
+    { label: "In Progress", value: 6 },
+    { label: "Rejected", value: 19 },
+    { label: "Accepted", value: 1 },
+];
+
+
+
+
 type MainProps = {};
 
 function Main({ }: MainProps) {

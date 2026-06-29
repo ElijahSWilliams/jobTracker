@@ -17,7 +17,11 @@ function Profile({ name, image, stats }: ProfileProps) {
         <div className="profile">
             <button className="profile__toggle">=</button>
 
-            <img src={image} alt={`${name}'s Profile`} className="profile__image" />
+            <label className="profile__image-wrapper">
+                <img src={image} alt={`${name}'s Profile`} className="profile__image" />
+                <input type="file" hidden />
+            </label>
+
             <h1 className="profile__name">
                 Hello, <br></br>  {name}!
             </h1>

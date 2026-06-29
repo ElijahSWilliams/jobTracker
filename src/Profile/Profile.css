@@ -31,6 +31,10 @@
  
 }
 
+.profile__image-wrapper {
+  cursor: pointer;
+}
+
 .profile__image {
     width: 120px;
   height: 120px;
@@ -46,7 +50,12 @@
 
     margin-top: 70px;
   margin-bottom: 65px;
+} 
+
+.profile__image:hover {
+  opacity: 0.85;
 }
+
 
 .profile__name {
     font-size: 20px;
