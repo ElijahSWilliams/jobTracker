@@ -17,3 +17,7 @@ body {
       #3a3a3a
     );
 }
+
+* {
+  outline: 1px solid red;
+}

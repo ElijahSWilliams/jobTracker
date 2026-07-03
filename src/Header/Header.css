@@ -1,14 +1,18 @@
 .header {
-    width: 100%;
-    padding: 20px 30px;
+    width: 100%; 
+    max-width: 1000px;
+    padding: 20px 30px; 
 
-    border-bottom: 1px solid #444;
+    margin: 0 auto; 
+    margin-bottom: 135px
 
-    position: sticky;
-    top: 0;
+    /* border-bottom: 1px solid #444; */
 
-    background: rgba(0,0,0,0.2); /* optional but nice */
-    backdrop-filter: blur(10px);
+  /*   position: sticky;
+    top: 0; */
+
+   /*  background: rgba(0,0,0,0.2) */; /* optional but nice */
+   /*  backdrop-filter: blur(10px); */
 }
 
 .header__title {

@@ -1,6 +1,6 @@
 .profile {
   width: 300px;
-  height: 100vh;
+  /* height: 100vh; */
   padding: 10px;
 
   background: linear-gradient(
@@ -27,7 +27,9 @@
       inset 0 -2px 4px rgba(0, 0, 0, 0.15);
 
   transition: width 0.3s ease;
-  overflow: hidden;
+  overflow: hidden; 
+
+
 }
 
 .profile__toggle {
