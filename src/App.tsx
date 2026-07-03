@@ -4,11 +4,13 @@ import './App.css'
 import Header from './Header/Header'
 import Main from './Main/Main'
 import Profile from './Profile/Profile'
+import AddJobModal from './addJobModal/AddJobModal'
 import profileImage from "./assets/hero.png"
 import { Routes, Route } from 'react-router-dom'
 
 function App() {
   const [sidebarOpen, setSideBarOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
 
   /* FUNCTIONS */
@@ -16,8 +18,17 @@ function App() {
     setSideBarOpen(prev => !prev);
   }
 
-  return (
+  const toggleModalOpen = () => {
+    setIsModalOpen(true);
 
+  }
+
+  const toggleModalClose = () => {
+
+    setIsModalOpen(false);
+  }
+
+  return (
     <div className='app'>
 
       <Profile open={sidebarOpen} name="Elijah" toggleSidebar={toggleSidebar} image={profileImage} stats={[
@@ -31,13 +42,18 @@ function App() {
         <Routes>
 
 
-          <Route path='/' element={<Main />} />
+          <Route path='/' element={<Main toggleModalOpen={toggleModalOpen} />} />
 
           {/* <section></section>
           <section></section> */}
         </Routes>
       </div>
+
+
+      {/* Conditional Rendering */}
+      {isModalOpen && (<AddJobModal toggleModalClose={toggleModalClose} />)}
     </div>
+
 
   )
 }

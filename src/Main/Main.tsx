@@ -10,17 +10,17 @@ const stats = [
 ];
 
 
+type MainProps = {
+    toggleModalOpen: () => void;
+};
 
-
-type MainProps = {};
-
-function Main({ }: MainProps) {
+function Main({ toggleModalOpen }: MainProps) {
 
     return (
         <div className="main">
             <div className="main__header">
                 <h1 className="main__title">Stats</h1>
-                <button className="main__add-button"> + Add Job</button>
+                <button onClick={toggleModalOpen} className="main__add-button"> + Add Job</button>
             </div>
 
 

@@ -8,7 +8,8 @@ A simple job tracking dashboard built with React and TypeScript. This project he
 - Job status sections (Applied, Saved, Interviewing, etc.)
 - Responsive and modern UI design
 - Component-based architecture using React
-- Type-safe development with TypeScript
+- Type-safe development with TypeScript 
+
 
 ## 🛠️ Tech Stack
 
@@ -33,6 +34,8 @@ This project was built to practice:
 - Drag and drop job statuses
 - Authentication system
 - Filter and search jobs
+- Analytics 
+-
 
 ## 🧑‍💻 Author
 
