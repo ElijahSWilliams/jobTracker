@@ -35,5 +35,11 @@ export const initialJobs: Jobs[] = [
         company: "Target",
         position: "Full Stack Engineer",
         status: "Saved",
+    },
+    {
+        id: "4",
+        company: "Walmart",
+        position: "Full Stack Engineer",
+        status: "Offer",
     }
 ];

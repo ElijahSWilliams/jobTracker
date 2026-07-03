@@ -71,7 +71,7 @@ function App() {
         <Routes>
 
 
-          <Route path='/' element={<Main toggleModalOpen={toggleModalOpen} />} />
+          <Route path='/' element={<Main toggleModalOpen={toggleModalOpen} jobs={initialJobs} />} />
 
           {/* <section></section>
           <section></section> */}

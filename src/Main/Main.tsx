@@ -1,20 +1,22 @@
+import type { Jobs } from "../Data/jobs";
 import "./Main.css";
 
 /* PLACEHOLDER STATS */
-const stats = [
-    { label: "Saved", value: 12 },
-    { label: "Applied", value: 38 },
-    { label: "In Progress", value: 6 },
-    { label: "Rejected", value: 19 },
-    { label: "Accepted", value: 1 },
-];
-
 
 type MainProps = {
     toggleModalOpen: () => void;
+    jobs: Jobs[];
 };
 
-function Main({ toggleModalOpen }: MainProps) {
+function Main({ toggleModalOpen, jobs }: MainProps) {
+
+    const appliedJobs = jobs.filter(job => job.status === "Applied");
+    const interviewJobs = jobs.filter(job => job.status === "Interviewing");
+    const offerJobs = jobs.filter(job => job.status === "Offer");
+    const rejectedJobs = jobs.filter(job => job.status === "Rejected");
+    const savedJobs = jobs.filter(job => job.status === "Saved")
+
+    console.log(offerJobs)
 
     return (
         <div className="main">
@@ -27,11 +29,41 @@ function Main({ toggleModalOpen }: MainProps) {
 
             {/* Boxes */}
             <div className="main__container">
-                <div className="main__box">Saved</div>
-                <div className="main__box">Applied</div>
-                <div className="main__box">In Progress</div>
-                <div className="main__box">Rejected</div>
-                <div className="main__box">Accepted</div>
+                <div className="main__box">
+                    <h2 className="main__box_header">Saved</h2>
+                    {savedJobs.map(job => (
+                        <div key={job.id} className="main__box-description"> {job.company} - {job.position} </div>
+                    ))}
+                </div>
+
+                <div className="main__box">
+                    <h2 className="main__box_header">Applied</h2>
+                    {appliedJobs.map(job => (
+                        <div key={job.id} className="main__box-description"> {job.company} - {job.position} </div>
+                    ))}
+                </div>
+
+                <div className="main__box">
+                    <h2 className="main__box_header">Interviewing</h2>
+                    {interviewJobs.map(job => (
+                        <div key={job.id} className="main__box-description"> {job.company} - {job.position} </div>
+                    ))}
+                </div>
+
+                <div className="main__box">
+                    <h2 className="main__box_header">Offer</h2>
+                    {offerJobs.map(job => (
+                        <div key={job.id} className="main__box-description"> {job.company} - {job.position} </div>
+                    ))}
+                </div>
+
+                <div className="main__box">
+                    <h2 className="main__box_header">Rejected</h2>
+                    {rejectedJobs.map(job => (
+                        <div key={job.id} className="main__box-description"> {job.company} - {job.position} </div>
+                    ))}
+                </div>
+
             </div>
         </div>
     );
