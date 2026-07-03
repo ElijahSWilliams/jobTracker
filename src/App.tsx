@@ -7,10 +7,13 @@ import Profile from './Profile/Profile'
 import AddJobModal from './addJobModal/AddJobModal'
 import profileImage from "./assets/hero.png"
 import { Routes, Route } from 'react-router-dom'
+import { initialJobs, type Jobs } from './Data/jobs'
 
 function App() {
   const [sidebarOpen, setSideBarOpen] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [jobs, setJobs] = useState<Jobs[]>(initialJobs);
+
 
 
   /* FUNCTIONS */
@@ -28,14 +31,40 @@ function App() {
     setIsModalOpen(false);
   }
 
+  /* Statistics. Passed to profile and Main */
+  const statistics = [
+    {
+      label: "Applications",
+      value: jobs.length,
+    },
+    {
+      label: "Applied",
+      value: jobs.filter(job => job.status === 'Applied').length
+    },
+    {
+      label: "Interviewing",
+      value: jobs.filter(job => job.status === 'Interviewing').length
+    },
+    {
+      label: "Offers",
+      value: jobs.filter(job => job.status === 'Offer').length
+    },
+    {
+      label: "Rejected",
+      value: jobs.filter(job => job.status === 'Rejected').length
+    },
+    {
+      label: "Saved",
+      value: jobs.filter(job => job.status === 'Saved').length
+    }
+  ]
+
+
+
   return (
     <div className='app'>
 
-      <Profile open={sidebarOpen} name="Elijah" toggleSidebar={toggleSidebar} image={profileImage} stats={[
-        { label: "Applications", value: 12 },
-        { label: "Interviews", value: 4 },
-        { label: "Offers", value: 4 }
-      ]} />
+      <Profile open={sidebarOpen} name="Elijah" toggleSidebar={toggleSidebar} image={profileImage} stats={statistics} />
 
       <div className='app__main'>
         <Header />

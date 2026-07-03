@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Profile.css"
+import { initialJobs, type Jobs } from "../Data/jobs";
 
 
 type Stat = {
@@ -12,14 +13,12 @@ type ProfileProps = {
     image: string; /* Profile pic */
     open: boolean;
     toggleSidebar: () => void;
+    jobs: Jobs[];
     stats: Stat[];
 };
 
-function Profile({ open, name, image, toggleSidebar, stats }: ProfileProps) {
+function Profile({ open, name, image, jobs, toggleSidebar, stats }: ProfileProps) {
     const [profileImage, setProfileImage] = useState(image);
-
-
-
 
     /* FUNCTIONS */
     function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
