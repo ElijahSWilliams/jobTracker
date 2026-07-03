@@ -20,6 +20,7 @@ function Profile({ open, name, image, toggleSidebar, stats }: ProfileProps) {
 
 
 
+
     /* FUNCTIONS */
     function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
         const file = event.target.files?.[0]; //loof for files in event object and grab first one
@@ -37,7 +38,9 @@ function Profile({ open, name, image, toggleSidebar, stats }: ProfileProps) {
     return (
 
         <aside className={`profile ${open ? "profile-open" : "profile-closed"}`}>
-            <button className="profile__toggle" onClick={toggleSidebar}>x</button>
+            <button className="profile__toggle" onClick={toggleSidebar}>
+                {open ? "⬅" : "➡"}
+            </button>
             <div className="profile__content">
 
                 <label className="profile__image-wrapper">
@@ -47,7 +50,7 @@ function Profile({ open, name, image, toggleSidebar, stats }: ProfileProps) {
 
                 {/* DISPLAY USER NAME */}
                 <h1 className="profile__name">
-                    Hello, <br></br>  {name}!
+                    Hello,  {name}!
                 </h1>
 
 
