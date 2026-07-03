@@ -1,18 +1,17 @@
 .header {
-width: 100%;
-padding: 20px 30px;
+    width: 100%;
+    padding: 20px 30px;
 
-border-bottom: 1px solid #444;
+    border-bottom: 1px solid #444;
 
-position: sticky;
-top: 0;
-z-index: 100;
-}  
+    position: sticky;
+    top: 0;
 
-.header__title { 
- display: flex;
- justify-content: center;
- align-items: center; 
-
+    background: rgba(0,0,0,0.2); /* optional but nice */
+    backdrop-filter: blur(10px);
 }
 
+.header__title {
+   text-align: center;
+   margin: 0;
+   }

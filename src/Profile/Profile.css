@@ -1,30 +1,34 @@
 .profile {
-    width: 300px;  
-    padding: 10px;
-    height: 100vh;
+  width: 300px;
+  height: 100vh;
+  padding: 10px;
 
-    background: rgba(  135deg,
-    #bfc2c7,
-    #9da3aa,
-    #d8dadd);
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(12px);
-    
-    color: white;
+  background: linear-gradient(
+      135deg,
+      #bfc2c7,
+      #9da3aa,
+      #d8dadd
+  );
 
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 
-  border-right: 1px solid #7a7a7a; 
-  border-radius: 25px;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border-right: 1px solid #7a7a7a;
+  border-radius: 0 25px 25px 0;
 
   box-shadow:
-  inset 0 1px 2px rgba(255, 255, 255, 0.6),
-  inset 0 -2px 4px rgba(0, 0, 0, 0.15); 
+      inset 0 1px 2px rgba(255, 255, 255, 0.6),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.15);
 
-  transition: transform 0.3s ease;
-}   
+  transition: width 0.3s ease;
+  overflow: hidden;
+}
 
 .profile__toggle {
   position: fixed;
@@ -70,13 +74,22 @@
   transform: translateY(1px);
 }
 
-.profile-open {
-  transform: translateX(0);
+.profile-closed {
+  width: 100px;
+  padding: 10px;
+} 
+
+.profile__content {
+  transition: opacity 0.2s ease;
 }
 
-.profile-closed {
-  transform: translateX(-220px);
+.profile-closed .profile__content {
+ opacity: 0;
+ pointer-events: none;
+
 }
+
+
 
 .profile__image-wrapper {
   cursor: pointer;

@@ -38,26 +38,28 @@ function Profile({ open, name, image, toggleSidebar, stats }: ProfileProps) {
 
         <aside className={`profile ${open ? "profile-open" : "profile-closed"}`}>
             <button className="profile__toggle" onClick={toggleSidebar}>x</button>
+            <div className="profile__content">
 
-            <label className="profile__image-wrapper">
-                <img src={image} alt={`${name}'s Profile`} className="profile__image" />
-                <input type="file" accept="image/*" hidden onChange={handleImageChange} />
-            </label>
+                <label className="profile__image-wrapper">
+                    <img src={image} alt={`${name}'s Profile`} className="profile__image" />
+                    <input type="file" accept="image/*" hidden onChange={handleImageChange} />
+                </label>
 
-            {/* DISPLAY USER NAME */}
-            <h1 className="profile__name">
-                Hello, <br></br>  {name}!
-            </h1>
+                {/* DISPLAY USER NAME */}
+                <h1 className="profile__name">
+                    Hello, <br></br>  {name}!
+                </h1>
 
 
-            {/*  */}
-            <div className="profile__stats">
-                {stats.map((stat) => (
-                    <div className="profile__stat" key={stat.label}>
-                        <p>{stat.label}</p>
-                        <p>{stat.value}</p>
-                    </div>
-                ))}
+                {/*  */}
+                <div className="profile__stats">
+                    {stats.map((stat) => (
+                        <div className="profile__stat" key={stat.label}>
+                            <p>{stat.label}</p>
+                            <p>{stat.value}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
         </aside>
     );
