@@ -42,21 +42,25 @@ animation: modalPop 0.2s ease;
 
 
 
-
 .modal__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
    
     padding: 0px 10px;
+} 
+
+.modal__title {
+    margin-left: 10px;
 }
 
 
 .modal__close {
     background: transparent; 
-    border-radius: 10px;
-    width: 35px;
-    height: 35px;
+    width: 55px;
+    height: 55px;
+    font-weight: bold;
+    border: none;
 } 
 
 .modal__form {
@@ -100,6 +104,7 @@ animation: modalPop 0.2s ease;
 
 .modal__form-submit {
     padding: 10px;
+    width: 80px;
 
     border: 1px solid #8a8a8a;
     border-radius: 10px;
