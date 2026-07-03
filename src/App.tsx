@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import './App.css'
-
+import Header from './Header/Header'
 import Main from './Main/Main'
 import Profile from './Profile/Profile'
 import profileImage from "./assets/hero.png"
@@ -27,8 +27,14 @@ function App() {
       ]} />
 
       <div className='app__main'>
+        <Header />
         <Routes>
+
+
           <Route path='/' element={<Main />} />
+
+          {/* <section></section>
+          <section></section> */}
         </Routes>
       </div>
     </div>

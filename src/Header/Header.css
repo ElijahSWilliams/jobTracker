@@ -1,16 +1,11 @@
-/* .header {
-background-color: white;
-display: flex; 
-flex-direction: row;
-height: 100px;
-width: 100%;
+.header {
+/* display: flex;
+flex-direction: column; */
 
 
 }  
 
 .header__title { 
-    margin-top: 0px;
-    color: black; 
-    
+  
 }
- */
+

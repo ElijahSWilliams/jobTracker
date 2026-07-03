@@ -12,7 +12,10 @@ bottom: 20px;
 /* This places the main to the right */
 flex: 1;  
 
-padding: 0px 30px;
+padding: 0px 30px; 
+margin: 0 auto;
+margin-top: 400px;
+
 }  
 
 .main__header {

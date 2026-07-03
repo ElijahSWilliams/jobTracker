@@ -1,14 +1,13 @@
-/* import "./Header.css";
+import "./Header.css";
 
 type HeaderProps = {};
 
 function Header({ }: HeaderProps) {
     return (
         <div className="header">
-            <h1 className="header__title">Placeholder Title</h1>
-            <button> + Add Job</button>
+            <h1 className="header__title">Job Tracker</h1>
         </div>
     );
 }
 
-export default Header; */
+export default Header;

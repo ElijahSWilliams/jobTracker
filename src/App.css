@@ -5,8 +5,9 @@
 
 .app__main {
 flex: 1;
-display: flex;
-justify-content: center; 
-align-items: center;
+/* display: flex; */
+text-align: center;
+/* justify-content: center; 
+align-items: center; */
 }
  
