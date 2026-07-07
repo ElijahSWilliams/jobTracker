@@ -12,8 +12,14 @@ import { initialJobs, type Jobs } from './Data/jobs'
 function App() {
   const [sidebarOpen, setSideBarOpen] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [jobs, setJobs] = useState<Jobs[]>(initialJobs); 
- 
+  const [jobs, setJobs] = useState<Jobs[]>(initialJobs);
+
+
+  const addJob = (job: Jobs) => {
+    console.log(job);
+    setJobs(prevJobs => [...prevJobs, job]);
+  };
+
 
 
 
@@ -72,7 +78,7 @@ function App() {
         <Routes>
 
 
-          <Route path='/' element={<Main toggleModalOpen={toggleModalOpen} jobs={initialJobs} />} />
+          <Route path='/' element={<Main toggleModalOpen={toggleModalOpen} jobs={jobs} />} />
 
           {/* <section></section>
           <section></section> */}
@@ -81,7 +87,7 @@ function App() {
 
 
       {/* Conditional Rendering */}
-      {isModalOpen && (<AddJobModal toggleModalClose={toggleModalClose} />)}
+      {isModalOpen && (<AddJobModal toggleModalClose={toggleModalClose} addJob={addJob} />)}
     </div>
 
 

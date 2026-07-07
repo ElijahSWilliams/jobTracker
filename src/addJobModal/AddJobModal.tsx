@@ -1,17 +1,39 @@
-import "./AddJobModal.css"; 
-import type { JobForm } from "../Data/jobs";
+import "./AddJobModal.css";
+import type { Jobs, JobForm } from "../Data/jobs";
+import { useState } from "react";
 
 type AddJobModalProps = {
-    toggleModalClose: () => void; 
-}; 
+    toggleModalClose: () => void;
+    addJob: (job: Jobs) => void;
+};
 
-const [formData, setFormData] = useState<JobForm>({
-    company: "",
-    position: "",
-    status: "Saved",
-});
 
-function AddJobModal({ toggleModalClose }: AddJobModalProps) {
+function AddJobModal({ toggleModalClose, addJob }: AddJobModalProps) {
+
+    const [formData, setFormData] = useState<JobForm>({
+        company: "",
+        position: "",
+        status: "Saved",
+    });
+
+
+
+    /* Functions */
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        const newJob: Jobs = {
+            id: crypto.randomUUID(),
+            ...formData,
+        }
+
+
+        addJob(newJob);
+        toggleModalClose();
+    }
+
+
+
     return (
         <div className="modal__container" onClick={toggleModalClose}>
 
@@ -21,18 +43,34 @@ function AddJobModal({ toggleModalClose }: AddJobModalProps) {
                     <button className="modal__close" onClick={toggleModalClose}> X </button>
                 </div>
                 {/* FORM */}
-                <form className="modal__form">
-                    <input className="modal__form-input" type="text" placeholder="Company Name"></input>
-                    <input className="modal__form-input" type="text" placeholder="Position"></input>
-                    <select>
+                <form className="modal__form" onSubmit={handleSubmit}>
+                    <input className="modal__form-input" type="text" placeholder="Company Name" value={formData.company} required onChange={(e) => {
+                        setFormData({
+                            ...formData,
+                            company: e.target.value,
+                        })
+                    }}></input>
+                    <input className="modal__form-input" type="text" placeholder="Position" value={formData.position} required onChange={(e) => {
+                        setFormData({
+                            ...formData,
+                            position: e.target.value,
+                        })
+                    }}></input>
+
+                    <select value={formData.status} required onChange={(e) => (
+                        setFormData({
+                            ...formData,
+                            status: e.target.value as JobForm["status"],
+                        })
+                    )} >
                         <option>Applied</option>
                         <option>Interview</option>
                         <option>Offer</option>
                         <option>Rejected</option>
                     </select>
 
-                    <button type="submit" className="modal__form-submit">Add</button>
-                </form>
+                    <button type="submit" className="modal__form-submit" >Add</button>
+                </form >
             </div>
 
         </div>

@@ -37,13 +37,13 @@ export const initialJobs: Jobs[] = [
         status: "Offer",
     },
     {
-        id: "4",
+        id: "5",
         company: "Target",
         position: "Full Stack Engineer",
         status: "Saved",
     },
     {
-        id: "4",
+        id: "6",
         company: "Walmart",
         position: "Full Stack Engineer",
         status: "Saved",

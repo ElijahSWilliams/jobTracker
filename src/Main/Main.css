@@ -99,6 +99,7 @@ margin: 0;
 .main__box-card {
     margin: 0 2px; 
     max-width: 200px; 
+    min-width: 100px;
     border: 2px solid white;
     border-radius: 10px;
     
