@@ -1,8 +1,15 @@
-import "./AddJobModal.css";
+import "./AddJobModal.css"; 
+import type { JobForm } from "../Data/jobs";
 
 type AddJobModalProps = {
-    toggleModalClose: () => void;
-};
+    toggleModalClose: () => void; 
+}; 
+
+const [formData, setFormData] = useState<JobForm>({
+    company: "",
+    position: "",
+    status: "Saved",
+});
 
 function AddJobModal({ toggleModalClose }: AddJobModalProps) {
     return (

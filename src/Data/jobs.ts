@@ -3,7 +3,13 @@ export type Jobs = {
     company: string;
     position: string;
     status: 'Applied' | 'Interviewing' | 'Offer' | 'Rejected' | 'Saved';
-}
+} 
+
+export type JobForm = {
+    company: string;
+    position: string;
+    status: 'Applied' | 'Interviewing' | 'Offer' | 'Rejected' | 'Saved';
+};
 
 export const initialJobs: Jobs[] = [
     {
@@ -22,13 +28,13 @@ export const initialJobs: Jobs[] = [
         id: "3",
         company: "Meta",
         position: "React Developer",
-        status: "Offer",
+        status: "Applied",
     },
     {
         id: "4",
         company: "Netflix",
         position: "Full Stack Engineer",
-        status: "Rejected",
+        status: "Offer",
     },
     {
         id: "4",
@@ -40,6 +46,18 @@ export const initialJobs: Jobs[] = [
         id: "4",
         company: "Walmart",
         position: "Full Stack Engineer",
-        status: "Offer",
-    }
+        status: "Saved",
+    }, 
+/*     {
+        id: "4",
+        company: "Juno",
+        position: "Full Stack Engineer",
+        status: "Saved",
+    },
+    {
+        id: "4",
+        company: "Mars",
+        position: "Full Stack Engineer",
+        status: "Saved",
+    } */
 ];

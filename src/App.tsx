@@ -12,7 +12,8 @@ import { initialJobs, type Jobs } from './Data/jobs'
 function App() {
   const [sidebarOpen, setSideBarOpen] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [jobs, setJobs] = useState<Jobs[]>(initialJobs);
+  const [jobs, setJobs] = useState<Jobs[]>(initialJobs); 
+ 
 
 
 
