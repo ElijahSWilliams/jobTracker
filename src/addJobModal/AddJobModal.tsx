@@ -25,6 +25,7 @@ function AddJobModal({ toggleModalClose, addJob }: AddJobModalProps) {
         const newJob: Jobs = {
             id: crypto.randomUUID(),
             ...formData,
+            dateAdded: new Date().toLocaleDateString(),
         }
 
 
@@ -63,6 +64,7 @@ function AddJobModal({ toggleModalClose, addJob }: AddJobModalProps) {
                             status: e.target.value as JobForm["status"],
                         })
                     )} >
+                        <option>Saved</option>
                         <option>Applied</option>
                         <option>Interview</option>
                         <option>Offer</option>
