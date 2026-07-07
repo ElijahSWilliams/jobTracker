@@ -66,7 +66,7 @@ function AddJobModal({ toggleModalClose, addJob }: AddJobModalProps) {
                     )} >
                         <option>Saved</option>
                         <option>Applied</option>
-                        <option>Interview</option>
+                        <option>Interviewing</option>
                         <option>Offer</option>
                         <option>Rejected</option>
                     </select>
