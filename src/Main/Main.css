@@ -13,6 +13,20 @@ margin: 0 auto;
 
 padding: 0px 30px; 
 
+overflow-y: auto;
+
+
+ /* Hide scrollbar - Firefox */
+ scrollbar-width: none;
+
+ /* Hide scrollbar - IE/Edge */
+ -ms-overflow-style: none;
+}
+
+/* Hide scrollbar - Chrome/Safari */
+.main::-webkit-scrollbar {
+ display: none;
+
 
 }  
 
@@ -88,7 +102,11 @@ margin: 0;
   
     font-weight: bold; 
     color: white; 
-}
+
+    max-height: 600px;
+
+    overflow-y: auto;
+} 
 
 .main__box_header {
     font-size: 20px; 

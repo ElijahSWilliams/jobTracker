@@ -5,6 +5,7 @@
 
     background: linear-gradient(135deg, #5d5d5d, #2d2d2d); 
   
+    overflow: hidden;
 }
 
 .app__main {
@@ -16,5 +17,6 @@
    justify-content: flex-start;
     transition: all 0.3s ease;
 
-   /*  padding: 0px 30px; */
+   /*  padding: 0px 30px; */ 
+   min-width: 0;
 }
