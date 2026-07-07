@@ -103,9 +103,9 @@ margin: 0;
     font-weight: bold; 
     color: white; 
 
-    max-height: 600px;
+   /*  max-height: 600px; */
 
-    overflow-y: auto;
+    /* overflow-y: auto; */
 } 
 
 .main__box_header {

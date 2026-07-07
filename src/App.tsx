@@ -4,15 +4,18 @@ import './App.css'
 import Header from './Header/Header'
 import Main from './Main/Main'
 import Profile from './Profile/Profile'
-import AddJobModal from './addJobModal/AddJobModal'
+import AddJobModal from './addJobModal/AddJob'
 import profileImage from "./assets/hero.png"
 import { Routes, Route } from 'react-router-dom'
 import { initialJobs, type Jobs } from './Data/jobs'
+import Modal from './Modal/Modal';
+import JobModal from './JobModal/JobModal'
 
 function App() {
   const [sidebarOpen, setSideBarOpen] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [jobs, setJobs] = useState<Jobs[]>(initialJobs);
+  const [isOpen, setIsOpen] = useState(false)
 
 
   const addJob = (job: Jobs) => {
@@ -88,6 +91,9 @@ function App() {
 
       {/* Conditional Rendering */}
       {isModalOpen && (<AddJobModal toggleModalClose={toggleModalClose} addJob={addJob} />)}
+      {isModalOpen && (<Modal onClose={toggleModalClose} title='Job'>
+        <JobModal jobs={initialJobs} />
+      </Modal>)}
     </div>
 
 

@@ -32,11 +32,11 @@ function Main({ toggleModalOpen, jobs }: MainProps) {
                     <h2 className="main__box_header">Saved</h2>
 
                     {savedJobs.map(job => (
-                        <div key={job.id} className="main__box-card">
+                        <button key={job.id} className="main__box-card" onClick={toggleModalOpen}>
                             <h3> {job.company}</h3>
                             <p className="main__box-card-title">{job.position}</p>
                             <p className="main__box-card-date">Date Added: {job.dateAdded}</p>
-                        </div>
+                        </button>
                     ))}
                 </div>
 

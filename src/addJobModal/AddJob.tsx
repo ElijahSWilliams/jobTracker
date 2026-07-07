@@ -1,4 +1,4 @@
-import "./AddJobModal.css";
+import "./AddJob.css";
 import type { Jobs, JobForm } from "../Data/jobs";
 import { useState } from "react";
 
