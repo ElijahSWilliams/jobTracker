@@ -13,16 +13,9 @@ import JobModal from './JobModal/JobModal'
 
 function App() {
   const [sidebarOpen, setSideBarOpen] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeModal, setActiveModal] = useState<string | null>(null);
+  const [selectedJob, setSelectedJob] = useState<Jobs | null>(null)
   const [jobs, setJobs] = useState<Jobs[]>(initialJobs);
-  const [isOpen, setIsOpen] = useState(false)
-
-
-  const addJob = (job: Jobs) => {
-    console.log(job);
-    setJobs(prevJobs => [...prevJobs, job]);
-  };
-
 
 
 
@@ -32,14 +25,25 @@ function App() {
   }
 
   const toggleModalOpen = () => {
-    setIsModalOpen(true);
+    setActiveModal("addJob")
 
   }
 
   const toggleModalClose = () => {
-
-    setIsModalOpen(false);
+    setActiveModal("null");
   }
+
+  const addJob = (job: Jobs) => {
+    console.log(job);
+    setJobs(prevJobs => [...prevJobs, job]);
+  };
+
+  const viewJob = (job: Jobs) => {
+    setSelectedJob(job);
+    setActiveModal("jobDetails");
+  }
+
+
 
   /* Statistics. Passed to profile and Main */
   const statistics = [
@@ -90,10 +94,13 @@ function App() {
 
 
       {/* Conditional Rendering */}
-      {isModalOpen && (<AddJobModal toggleModalClose={toggleModalClose} addJob={addJob} />)}
-      {isModalOpen && (<Modal onClose={toggleModalClose} title='Job'>
-        <JobModal jobs={initialJobs} />
-      </Modal>)}
+      {activeModal === "addJob" && (<AddJobModal toggleModalClose={toggleModalClose} addJob={addJob} />)}
+
+      {activeModal === "jobDetails" &&
+        (<Modal onClose={toggleModalClose} title='Job Details'>
+          <JobModal job={jobs} />
+        </Modal>)}
+
     </div>
 
 

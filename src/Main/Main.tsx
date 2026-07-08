@@ -43,44 +43,44 @@ function Main({ toggleModalOpen, jobs }: MainProps) {
                 <div className="main__box">
                     <h2 className="main__box_header">Applied</h2>
                     {appliedJobs.map(job => (
-                        <div key={job.id} className="main__box-card">
+                        <button key={job.id} className="main__box-card">
                             <h3 className="main__box-card-title"> {job.company}</h3>
                             <p className="">{job.position} </p>
                             <p className="main__box-card-date">Date Added: {job.dateAdded}</p>
-                        </div>
+                        </button>
                     ))}
                 </div>
 
                 <div className="main__box">
                     <h2 className="main__box_header">Interviewing</h2>
                     {interviewJobs.map(job => (
-                        <div key={job.id} className="main__box-card">
+                        <button key={job.id} className="main__box-card">
                             <h3 className="main__box-card-title"> {job.company} </h3>
                             <p className="">{job.position} </p>
                             <p className="main__box-card-date">Date Added: {job.dateAdded}</p>
-                        </div>
+                        </button>
                     ))}
                 </div>
 
                 <div className="main__box">
                     <h2 className="main__box_header">Offer</h2>
                     {offerJobs.map(job => (
-                        <div key={job.id} className="main__box-card">
+                        <button key={job.id} className="main__box-card">
                             <h3 className=""> {job.company} </h3>
                             <p className=""> {job.position} </p>
                             <p className="main__box-card-date">Date Added: {job.dateAdded}</p>
-                        </div>
+                        </button>
                     ))}
                 </div>
 
                 <div className="main__box">
                     <h2 className="main__box_header">Rejected</h2>
                     {rejectedJobs.map(job => (
-                        <div key={job.id} className="main__box-card">
+                        <button key={job.id} className="main__box-card">
                             <h3 className=" ">{job.company}</h3>
                             <p className=""> {job.position}</p>
                             <p className="main__box-card-date">Date Added: {job.dateAdded}</p>
-                        </div>
+                        </button>
                     ))}
                 </div>
 
