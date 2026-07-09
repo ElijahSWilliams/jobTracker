@@ -4,7 +4,7 @@ import './App.css'
 import Header from './Header/Header'
 import Main from './Main/Main'
 import Profile from './Profile/Profile'
-import AddJobModal from './addJobModal/AddJob'
+import AddJob from './addJobModal/AddJob'
 import profileImage from "./assets/hero.png"
 import { Routes, Route } from 'react-router-dom'
 import { initialJobs, type Jobs } from './Data/jobs'
@@ -94,7 +94,9 @@ function App() {
 
 
       {/* Conditional Rendering */}
-      {activeModal === "addJob" && (<AddJobModal toggleModalClose={toggleModalClose} addJob={addJob} />)}
+      {activeModal === "addJob" && (<Modal onClose={toggleModalClose} title='Add Job'>
+        <AddJob toggleModalClose={toggleModalClose} addJob={addJob} />
+      </Modal>)}
 
       {activeModal === "jobDetails" &&
         (<Modal onClose={toggleModalClose} title='Job Details'>
