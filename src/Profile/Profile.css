@@ -96,8 +96,6 @@
 
 }
 
-
-
 .profile__image-wrapper {
   cursor: pointer;
 }
@@ -132,4 +130,31 @@
   
    /*  color: #111827; */ 
    color: white;
+  } 
+
+
+  /* Mobile */
+ @media (max-width: 1024px) { 
+
+  .profile { 
+    width: 150px;
+  }  
+
+  .profile__name {
+    font-size: 15px;
   }
+
+  .profile__image {
+    width: 80px;
+    height: 80px;
+  }
+
+
+  .profile__content {
+
+  } 
+
+  .profile-closed {
+    width: 40px;
+  }
+ }

@@ -127,3 +127,15 @@ margin: 0;
 .main__box-card-title {
     text-align: center;
 }
+
+/* Mobile */
+
+@media (max-width: 1024px) {
+
+.main {
+max-width: 700px;
+
+    
+}
+    
+}
