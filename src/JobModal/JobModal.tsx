@@ -7,13 +7,13 @@ type JobModalProps = {
 };
 
 export default function JobModal({ job }: JobModalProps) {
+    console.log(job)
     return (
-        <div className="modal__container">
-            <div className="modal">
-                <h1 className="modal__title">{job.company}</h1>
-                <p>{job.position}</p>
-                <p>{job.dateAdded}</p>
-            </div>
+        <div className="job__modal">
+            <h1>{job.company}</h1>
+            <p>{job.position}</p>
+            <p>{job.dateAdded}</p>
         </div>
+
     );
 }

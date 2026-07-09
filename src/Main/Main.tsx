@@ -5,10 +5,11 @@ import "./Main.css";
 
 type MainProps = {
     toggleModalOpen: () => void;
+    viewJob: (job: Jobs) => void;
     jobs: Jobs[];
 };
 
-function Main({ toggleModalOpen, jobs }: MainProps) {
+function Main({ toggleModalOpen, viewJob, jobs }: MainProps) {
 
     const appliedJobs = jobs.filter(job => job.status === "Applied");
     const interviewJobs = jobs.filter(job => job.status === "Interviewing");
@@ -32,7 +33,7 @@ function Main({ toggleModalOpen, jobs }: MainProps) {
                     <h2 className="main__box_header">Saved</h2>
 
                     {savedJobs.map(job => (
-                        <button key={job.id} className="main__box-card" onClick={toggleModalOpen}>
+                        <button key={job.id} className="main__box-card" onClick={() => viewJob(job)}>
                             <h3> {job.company}</h3>
                             <p className="main__box-card-title">{job.position}</p>
                             <p className="main__box-card-date">Date Added: {job.dateAdded}</p>
@@ -43,7 +44,7 @@ function Main({ toggleModalOpen, jobs }: MainProps) {
                 <div className="main__box">
                     <h2 className="main__box_header">Applied</h2>
                     {appliedJobs.map(job => (
-                        <button key={job.id} className="main__box-card">
+                        <button key={job.id} className="main__box-card" onClick={() => viewJob(job)}>
                             <h3 className="main__box-card-title"> {job.company}</h3>
                             <p className="">{job.position} </p>
                             <p className="main__box-card-date">Date Added: {job.dateAdded}</p>
@@ -54,7 +55,7 @@ function Main({ toggleModalOpen, jobs }: MainProps) {
                 <div className="main__box">
                     <h2 className="main__box_header">Interviewing</h2>
                     {interviewJobs.map(job => (
-                        <button key={job.id} className="main__box-card">
+                        <button key={job.id} className="main__box-card" onClick={() => viewJob(job)}>
                             <h3 className="main__box-card-title"> {job.company} </h3>
                             <p className="">{job.position} </p>
                             <p className="main__box-card-date">Date Added: {job.dateAdded}</p>
@@ -65,7 +66,7 @@ function Main({ toggleModalOpen, jobs }: MainProps) {
                 <div className="main__box">
                     <h2 className="main__box_header">Offer</h2>
                     {offerJobs.map(job => (
-                        <button key={job.id} className="main__box-card">
+                        <button key={job.id} className="main__box-card" onClick={() => viewJob(job)}>
                             <h3 className=""> {job.company} </h3>
                             <p className=""> {job.position} </p>
                             <p className="main__box-card-date">Date Added: {job.dateAdded}</p>
@@ -76,7 +77,7 @@ function Main({ toggleModalOpen, jobs }: MainProps) {
                 <div className="main__box">
                     <h2 className="main__box_header">Rejected</h2>
                     {rejectedJobs.map(job => (
-                        <button key={job.id} className="main__box-card">
+                        <button key={job.id} className="main__box-card" onClick={() => viewJob(job)}>
                             <h3 className=" ">{job.company}</h3>
                             <p className=""> {job.position}</p>
                             <p className="main__box-card-date">Date Added: {job.dateAdded}</p>

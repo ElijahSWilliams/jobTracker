@@ -85,7 +85,7 @@ function App() {
         <Routes>
 
 
-          <Route path='/' element={<Main toggleModalOpen={toggleModalOpen} jobs={jobs} />} />
+          <Route path='/' element={<Main viewJob={viewJob} toggleModalOpen={toggleModalOpen} jobs={jobs} />} />
 
           {/* <section></section>
           <section></section> */}
@@ -98,7 +98,7 @@ function App() {
 
       {activeModal === "jobDetails" &&
         (<Modal onClose={toggleModalClose} title='Job Details'>
-          <JobModal job={jobs} />
+          <JobModal job={selectedJob} />
         </Modal>)}
 
     </div>
