@@ -12,7 +12,7 @@ export default function JobModal({ job }: JobModalProps) {
         <div className="job__modal">
             <h1>{job.company}</h1>
             <p>{job.position}</p>
-            <p>{job.dateAdded}</p>
+            <p>Applied on: {job.dateAdded}</p>
             <p>{job.status}</p>
         </div>
 

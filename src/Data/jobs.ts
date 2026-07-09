@@ -51,7 +51,7 @@ export const initialJobs: Jobs[] = [
         company: "Target",
         position: "Full Stack Engineer",
         status: "Saved",
-        dateAdded: "",
+        dateAdded: "7/7/26",
         location: "",
     },
     {
