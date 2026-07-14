@@ -3,10 +3,11 @@ import "./JobModal.css";
 
 
 type JobModalProps = {
-    job: Jobs;
+    job: Jobs; 
+    handleDeleteJob: (jobID: string) => void;
 };
 
-export default function JobModal({ job }: JobModalProps) {
+export default function JobModal({ job, handleDeleteJob }: JobModalProps) {
 
 
 
@@ -15,7 +16,7 @@ export default function JobModal({ job }: JobModalProps) {
         <div className="job__modal">
             <div className="job__modal-btns">
                 <button className="job__modal-edit-btn">Edit </button>
-                <button className="job__modal-delete-btn"> Delete</button>
+                <button className="job__modal-delete-btn" onClick={() => handleDeleteJob(job.id)}> Delete</button>
             </div>
 
             <h1>{job.company}</h1>

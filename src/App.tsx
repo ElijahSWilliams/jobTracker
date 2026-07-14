@@ -1,5 +1,4 @@
-import { useState } from 'react'
-
+import { useState, useEffect } from 'react'
 import './App.css'
 import Header from './Header/Header'
 import Main from './Main/Main'
@@ -14,8 +13,24 @@ import JobModal from './JobModal/JobModal'
 function App() {
   const [sidebarOpen, setSideBarOpen] = useState(true);
   const [activeModal, setActiveModal] = useState<string | null>(null);
-  const [selectedJob, setSelectedJob] = useState<Jobs | null>(null)
-  const [jobs, setJobs] = useState<Jobs[]>(initialJobs);
+  const [selectedJob, setSelectedJob] = useState<Jobs | null>(null) 
+  //search for jobs in local storage, if not found use initialJobs
+  const [jobs, setJobs] = useState<Jobs[]>(() => { //begin arrow function
+
+    try {
+      const storedJobs = localStorage.getItem("jobs"); 
+      return storedJobs ? JSON.parse(storedJobs) : initialJobs;
+    
+    } catch {
+      //else return initalJobs
+      return initialJobs;
+    }//end try/catch
+  }); //end arrow function  
+
+
+  useEffect(() => {
+    localStorage.setItem("jobs", JSON.stringify(jobs));
+  }, [jobs]);
 
 
 
@@ -41,6 +56,11 @@ function App() {
   const viewJob = (job: Jobs) => {
     setSelectedJob(job);
     setActiveModal("jobDetails");
+  } 
+
+  const handleDeleteJob = (jobID: string) => {
+    setJobs(prevJobs => prevJobs.filter(job => job.id !== jobID));
+    setActiveModal(null); 
   }
 
 
@@ -100,7 +120,7 @@ function App() {
 
       {activeModal === "jobDetails" &&
         (<Modal onClose={toggleModalClose} title='Job Details'>
-          <JobModal job={selectedJob} />
+          <JobModal job={selectedJob} handleDeleteJob={handleDeleteJob} />
         </Modal>)}
 
     </div>
