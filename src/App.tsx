@@ -132,10 +132,12 @@ function App() {
 
       {activeModal === "jobDetails" &&
         (<Modal onClose={toggleModalClose} title='Job Details'>
-          <JobModal job={selectedJob} handleDeleteJob={handleDeleteJob} handleEditJob={handleEditJob}/>
+          <JobModal job={selectedJob} handleOpenEditModal={handleOpenEditModal} handleDeleteJob={handleDeleteJob} handleEditJob={handleEditJob}/>
         </Modal>)} 
 
-        {activeModal === "editJob" && (<EditModal job={selectedJob} handle   handleEditJob={handleEditJob}/>)}
+        {activeModal === "editJob" && (<Modal onClose={toggleModalClose} title='Edit Job'>
+          <EditModal job={selectedJob} handleEditJob={handleEditJob}/>
+        </Modal>)}
 
     </div>
 
