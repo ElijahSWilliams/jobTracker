@@ -59,7 +59,11 @@ function Profile({ open, name, image, toggleSidebar, stats }: ProfileProps) {
                             <p>{stat.value}</p>
                         </div>
                     ))}
-                </div>
+                </div> 
+
+                <button className="profile__logout" onClick={() => {
+                    alert("Logout Function in progress");
+                }}>Logout</button>
             </div>
         </aside>
     );

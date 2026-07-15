@@ -9,6 +9,7 @@ import { Routes, Route } from 'react-router-dom'
 import { initialJobs, type Jobs } from './Data/jobs'
 import Modal from './Modal/Modal';
 import JobModal from './JobModal/JobModal'
+import EditModal from "./EditModal/EditModal"
 
 function App() {
   const [sidebarOpen, setSideBarOpen] = useState(true);
@@ -42,6 +43,10 @@ function App() {
   const toggleModalOpen = () => {
     setActiveModal("addJob")
 
+  } 
+
+  const handleOpenEditModal = () => {
+    setActiveModal("editJob");
   }
 
   const toggleModalClose = () => {
@@ -61,6 +66,13 @@ function App() {
   const handleDeleteJob = (jobID: string) => {
     setJobs(prevJobs => prevJobs.filter(job => job.id !== jobID));
     setActiveModal(null); 
+  }
+
+  const handleEditJob = (jobID: string, updatedJob: Jobs) => { 
+  
+    setJobs(prevJobs => prevJobs.map(job => job.id === jobID ? updatedJob : job)); 
+    console.log("Job Updated:", updatedJob);
+    setActiveModal(null); //close modal after edits
   }
 
 
@@ -120,8 +132,10 @@ function App() {
 
       {activeModal === "jobDetails" &&
         (<Modal onClose={toggleModalClose} title='Job Details'>
-          <JobModal job={selectedJob} handleDeleteJob={handleDeleteJob} />
-        </Modal>)}
+          <JobModal job={selectedJob} handleDeleteJob={handleDeleteJob} handleEditJob={handleEditJob}/>
+        </Modal>)} 
+
+        {activeModal === "editJob" && (<EditModal job={selectedJob} handle   handleEditJob={handleEditJob}/>)}
 
     </div>
 
