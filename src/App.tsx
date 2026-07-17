@@ -1,81 +1,78 @@
-import { useState, useEffect } from 'react'
-import './App.css'
-import Header from './Header/Header'
-import Main from './Main/Main'
-import Profile from './Profile/Profile'
-import AddJob from './addJobModal/AddJob'
-import profileImage from "./assets/hero.png"
-import { Routes, Route } from 'react-router-dom'
-import { initialJobs, type Jobs } from './Data/jobs'
-import Modal from './Modal/Modal';
-import JobModal from './JobModal/JobModal'
-import EditModal from "./EditModal/EditModal"
+import { useState, useEffect } from "react";
+import "./App.css";
+import Header from "./Header/Header";
+import Main from "./Main/Main";
+import Profile from "./Profile/Profile";
+import AddJob from "./addJobModal/AddJob";
+import profileImage from "./assets/hero.png";
+import { Routes, Route } from "react-router-dom";
+import { initialJobs, type Jobs } from "./Data/jobs";
+import Modal from "./Modal/Modal";
+import JobModal from "./JobModal/JobModal";
+import EditModal from "./EditModal/EditModal";
 
 function App() {
   const [sidebarOpen, setSideBarOpen] = useState(true);
   const [activeModal, setActiveModal] = useState<string | null>(null);
-  const [selectedJob, setSelectedJob] = useState<Jobs | null>(null) 
+  const [selectedJob, setSelectedJob] = useState<Jobs | null>(null);
+  const [isSignedIn, setIsSignedIn] = useState(true); //user sign in state
+
   //search for jobs in local storage, if not found use initialJobs
-  const [jobs, setJobs] = useState<Jobs[]>(() => { //begin arrow function
+  const [jobs, setJobs] = useState<Jobs[]>(() => {
+    //begin arrow function
 
     try {
-      const storedJobs = localStorage.getItem("jobs"); 
+      const storedJobs = localStorage.getItem("jobs");
       return storedJobs ? JSON.parse(storedJobs) : initialJobs;
-    
     } catch {
       //else return initalJobs
       return initialJobs;
-    }//end try/catch
-  }); //end arrow function  
-
+    } //end try/catch
+  }); //end arrow function
 
   useEffect(() => {
     localStorage.setItem("jobs", JSON.stringify(jobs));
   }, [jobs]);
 
-
-
   /* FUNCTIONS */
   const toggleSidebar = () => {
-    setSideBarOpen(prev => !prev);
-  }
+    setSideBarOpen((prev) => !prev);
+  };
 
   const toggleModalOpen = () => {
-    setActiveModal("addJob")
-
-  } 
+    setActiveModal("addJob");
+  };
 
   const handleOpenEditModal = () => {
     setActiveModal("editJob");
-  }
+  };
 
   const toggleModalClose = () => {
     setActiveModal("null");
-  }
+  };
 
   const addJob = (job: Jobs) => {
     console.log(job);
-    setJobs(prevJobs => [...prevJobs, job]);
+    setJobs((prevJobs) => [...prevJobs, job]);
   };
 
   const viewJob = (job: Jobs) => {
     setSelectedJob(job);
     setActiveModal("jobDetails");
-  } 
+  };
 
   const handleDeleteJob = (jobID: string) => {
-    setJobs(prevJobs => prevJobs.filter(job => job.id !== jobID));
-    setActiveModal(null); 
-  }
+    setJobs((prevJobs) => prevJobs.filter((job) => job.id !== jobID));
+    setActiveModal(null);
+  };
 
-  const handleEditJob = (jobID: string, updatedJob: Jobs) => { 
-  
-    setJobs(prevJobs => prevJobs.map(job => job.id === jobID ? updatedJob : job)); 
+  const handleEditJob = (jobID: string, updatedJob: Jobs) => {
+    setJobs((prevJobs) =>
+      prevJobs.map((job) => (job.id === jobID ? updatedJob : job)),
+    );
     console.log("Job Updated:", updatedJob);
     setActiveModal(null); //close modal after edits
-  }
-
-
+  };
 
   /* Statistics. Passed to profile and Main */
   const statistics = [
@@ -85,64 +82,80 @@ function App() {
     },
     {
       label: "Applied",
-      value: jobs.filter(job => job.status === 'Applied').length
+      value: jobs.filter((job) => job.status === "Applied").length,
     },
     {
       label: "Interviewing",
-      value: jobs.filter(job => job.status === 'Interviewing').length
+      value: jobs.filter((job) => job.status === "Interviewing").length,
     },
     {
       label: "Offers",
-      value: jobs.filter(job => job.status === 'Offer').length
+      value: jobs.filter((job) => job.status === "Offer").length,
     },
     {
       label: "Rejected",
-      value: jobs.filter(job => job.status === 'Rejected').length
+      value: jobs.filter((job) => job.status === "Rejected").length,
     },
     {
       label: "Saved",
-      value: jobs.filter(job => job.status === 'Saved').length
-    }
-  ]
-
-
+      value: jobs.filter((job) => job.status === "Saved").length,
+    },
+  ];
 
   return (
-    <div className='app'>
+    <div className="app">
+      <Profile
+        open={sidebarOpen}
+        name="Elijah"
+        toggleSidebar={toggleSidebar}
+        image={profileImage}
+        stats={statistics}
+      />
 
-      <Profile open={sidebarOpen} name="Elijah" toggleSidebar={toggleSidebar} image={profileImage} stats={statistics} />
-
-      <div className='app__main'>
-        <Header />
+      <div className="app__main">
+        <Header isSignedIn={isSignedIn} />
         <Routes>
-
-
-          <Route path='/' element={<Main viewJob={viewJob} toggleModalOpen={toggleModalOpen} jobs={jobs} />} />
+          <Route
+            path="/"
+            element={
+              <Main
+                viewJob={viewJob}
+                toggleModalOpen={toggleModalOpen}
+                jobs={jobs}
+              />
+            }
+          />
 
           {/* <section></section>
           <section></section> */}
         </Routes>
       </div>
 
-
       {/* Conditional Rendering */}
-      {activeModal === "addJob" && (<Modal onClose={toggleModalClose} title='Add Job'>
-        <AddJob toggleModalClose={toggleModalClose} addJob={addJob} />
-      </Modal>)}
+      {activeModal === "addJob" && (
+        <Modal onClose={toggleModalClose} title="Add Job">
+          <AddJob toggleModalClose={toggleModalClose} addJob={addJob} />
+        </Modal>
+      )}
 
-      {activeModal === "jobDetails" &&
-        (<Modal onClose={toggleModalClose} title='Job Details'>
-          <JobModal job={selectedJob} handleOpenEditModal={handleOpenEditModal} handleDeleteJob={handleDeleteJob} handleEditJob={handleEditJob}/>
-        </Modal>)} 
+      {activeModal === "jobDetails" && (
+        <Modal onClose={toggleModalClose} title="Job Details">
+          <JobModal
+            job={selectedJob}
+            handleOpenEditModal={handleOpenEditModal}
+            handleDeleteJob={handleDeleteJob}
+            handleEditJob={handleEditJob}
+          />
+        </Modal>
+      )}
 
-        {activeModal === "editJob" && (<Modal onClose={toggleModalClose} title='Edit Job'>
-          <EditModal job={selectedJob} handleEditJob={handleEditJob}/>
-        </Modal>)}
-
+      {activeModal === "editJob" && (
+        <Modal onClose={toggleModalClose} title="Edit Job">
+          <EditModal job={selectedJob} handleEditJob={handleEditJob} />
+        </Modal>
+      )}
     </div>
-
-
-  )
+  );
 }
 
-export default App
+export default App;
