@@ -5,10 +5,10 @@ type HeaderProps = {};
 function Header({ }: HeaderProps) {
     return (
         <div className="header">
-            <h1 className="header__title">Job Tracker</h1>
-            {/* <div className="nav">
-                <button className="">Settings</button>
-            </div> */}
+            <div className="header__nav">
+                <h1 className="header__title">Job Tracker</h1>
+                <button className="header__account-btn">Login /Logout</button>
+            </div>
         </div>
     );
 }
