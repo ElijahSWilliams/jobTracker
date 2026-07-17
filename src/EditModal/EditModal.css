@@ -11,8 +11,16 @@
 }
 
 .edit__modal-form-input {
-  border: none; 
-  border-bottom: 1px solid black;
+  width: 100%;
+  padding: 8px 12px;
+  margin-bottom: 20px;
+  border: none;
+  border-bottom: 2px solid #888;
+  background: transparent;
+  outline: none;
+  color: #111;
+  transition: border-color 0.2s ease;
+
 }
 
 .edit__modal-form-submit { 
