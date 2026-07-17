@@ -29,8 +29,8 @@ This project was built to practice:
 
 ## 🧠 Future Improvements
 
-- Add ability to create job entries
-- Store data in localStorage or backend
+- Add ability to create job entries ✅
+- Store data in localStorage or backend ✅
 - Drag and drop job statuses
 - Authentication system
 - Filter and search jobs
