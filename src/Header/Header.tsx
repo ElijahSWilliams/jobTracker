@@ -2,14 +2,21 @@ import "./Header.css";
 
 type HeaderProps = {
   isSignedIn: boolean;
+  toggleSideBar: () => void;
+  open: boolean;
 };
 
-function Header({ isSignedIn }: HeaderProps) {
+function Header({ isSignedIn, toggleSideBar, open }: HeaderProps) {
   return (
     <div className="header">
       <h1 className="header__title">Job Tracker</h1>
       <button className="header__account-btn">
         {isSignedIn ? "Logout" : "Login"}
+      </button>
+
+      {/* Displays only on mobile */}
+      <button className="header__profile_toggle" onClick={toggleSideBar}>
+        {open ? "⬅" : "➡"}
       </button>
     </div>
   );

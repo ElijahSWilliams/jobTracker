@@ -113,7 +113,11 @@ function App() {
       />
 
       <div className="app__main">
-        <Header isSignedIn={isSignedIn} />
+        <Header
+          isSignedIn={isSignedIn}
+          open={sidebarOpen}
+          toggleSideBar={toggleSidebar}
+        />
         <Routes>
           <Route
             path="/"
