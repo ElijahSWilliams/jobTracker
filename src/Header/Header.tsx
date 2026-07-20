@@ -4,13 +4,15 @@ type HeaderProps = {
   isSignedIn: boolean;
   toggleSideBar: () => void;
   open: boolean;
+  handleSignIn: () => void;
+  handleOpenSignUp: () => void;
 };
 
-function Header({ isSignedIn, toggleSideBar, open }: HeaderProps) {
+function Header({ isSignedIn, toggleSideBar, handleSignIn, handleOpenSignUp, open }: HeaderProps) {
   return (
     <div className="header">
       <h1 className="header__title">Job Tracker</h1>
-      <button className="header__account-btn">
+      <button className="header__account-btn" onClick={handleOpenSignUp}>
         {isSignedIn ? "Logout" : "Login"}
       </button>
 

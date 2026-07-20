@@ -1,4 +1,4 @@
-const jwt = required("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const {JWT_SECRET} = require("../utils/config"); 
 const UnauthorizedError = require("../utils/UnauthorizedError")
 
@@ -27,4 +27,6 @@ const auth = (req, res, next ) => {
  
    return next(); // send request to next middleware
 
-}
+} 
+
+module.exports = auth;

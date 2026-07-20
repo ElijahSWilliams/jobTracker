@@ -10,12 +10,13 @@ import { initialJobs, type Jobs } from "./Data/jobs";
 import Modal from "./Modal/Modal";
 import JobModal from "./JobModal/JobModal";
 import EditModal from "./EditModal/EditModal";
+import SignUpModal from "./SignUpModal/SignUpModal";
 
 function App() {
   const [sidebarOpen, setSideBarOpen] = useState(true);
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [selectedJob, setSelectedJob] = useState<Jobs | null>(null);
-  const [isSignedIn, setIsSignedIn] = useState(true); //user sign in state
+  const [isSignedIn, setIsSignedIn] = useState(false); //user sign in state
 
   //search for jobs in local storage, if not found use initialJobs
   const [jobs, setJobs] = useState<Jobs[]>(() => {
@@ -47,6 +48,11 @@ function App() {
     setActiveModal("editJob");
   };
 
+  const handleOpenSignUpModal = () => {
+    setActiveModal("signup");
+  };
+
+
   const toggleModalClose = () => {
     setActiveModal("null");
   };
@@ -73,6 +79,10 @@ function App() {
     console.log("Job Updated:", updatedJob);
     setActiveModal(null); //close modal after edits
   };
+
+  const handleSignIn = () => {
+
+  }
 
   /* Statistics. Passed to profile and Main */
   const statistics = [
@@ -117,6 +127,8 @@ function App() {
           isSignedIn={isSignedIn}
           open={sidebarOpen}
           toggleSideBar={toggleSidebar}
+          handleSignIn={handleSignIn}
+          handleOpenSignUp={handleOpenSignUpModal}
         />
         <Routes>
           <Route
@@ -156,6 +168,12 @@ function App() {
       {activeModal === "editJob" && (
         <Modal onClose={toggleModalClose} title="Edit Job">
           <EditModal job={selectedJob} handleEditJob={handleEditJob} />
+        </Modal>
+      )}
+
+      {activeModal === "signup" && (
+        <Modal onClose={toggleModalClose} title="Sign Up">
+          <SignUpModal></SignUpModal>
         </Modal>
       )}
     </div>
