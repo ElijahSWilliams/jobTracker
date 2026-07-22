@@ -11,7 +11,14 @@ const validateUser = celebrate({
         email: Joi.string().required().email(),
         password: Joi.string().required()
     })
+}) 
+
+const validateJob = celebrate({
+    body: Joi.object().keys({
+        
+    })
 })
+
 
 
 module.exports = {

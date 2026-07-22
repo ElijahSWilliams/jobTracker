@@ -13,7 +13,7 @@ function Header({ isSignedIn, toggleSideBar, handleOpenSignUp, open }: HeaderPro
     <div className="header">
       <h1 className="header__title">Job Tracker</h1>
       <button className="header__account-btn" onClick={handleOpenSignUp}>
-        {isSignedIn ? "Logout" : "Login"}
+        {isSignedIn ? "Logout" : "Sign Up"}
       </button>
 
       {/* Displays only on mobile */}

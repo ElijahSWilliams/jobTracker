@@ -36,6 +36,14 @@ function App() {
     localStorage.setItem("jobs", JSON.stringify(jobs));
   }, [jobs]);
 
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      console.log("Token FOund:", token);
+
+    }
+  }, [])
+
   /* FUNCTIONS */
   const toggleSidebar = () => {
     setSideBarOpen((prev) => !prev);
