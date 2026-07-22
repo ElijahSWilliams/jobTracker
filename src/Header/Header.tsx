@@ -4,11 +4,11 @@ type HeaderProps = {
   isSignedIn: boolean;
   toggleSideBar: () => void;
   open: boolean;
-  handleSignIn: () => void;
+
   handleOpenSignUp: () => void;
 };
 
-function Header({ isSignedIn, toggleSideBar, handleSignIn, handleOpenSignUp, open }: HeaderProps) {
+function Header({ isSignedIn, toggleSideBar, handleOpenSignUp, open }: HeaderProps) {
   return (
     <div className="header">
       <h1 className="header__title">Job Tracker</h1>

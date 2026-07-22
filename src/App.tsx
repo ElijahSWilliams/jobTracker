@@ -6,11 +6,12 @@ import Profile from "./Profile/Profile";
 import AddJob from "./addJobModal/AddJob";
 import profileImage from "./assets/hero.png";
 import { Routes, Route } from "react-router-dom";
-import { initialJobs, type Jobs } from "./Constants/Constants";
+import { initialJobs, type Jobs } from "./Utils/Constants";
 import Modal from "./Modal/Modal";
 import JobModal from "./JobModal/JobModal";
 import EditModal from "./EditModal/EditModal";
 import SignUpModal from "./SignUpModal/SignUpModal";
+import signUp from "./Utils/Auth";
 
 function App() {
   const [sidebarOpen, setSideBarOpen] = useState(true);
@@ -80,7 +81,14 @@ function App() {
     setActiveModal(null); //close modal after edits
   };
 
-  const handleSignIn = () => {
+  const handleSignUp = (userData) => {
+    console.log("Signing You Up");
+    signUp(userData)
+      .then((res) => {
+        console.log('Data:', res);
+        //setCurrentUser(userData) 
+        //setSigned in to true. isSignedIn(true);
+      })
 
   }
 
@@ -127,7 +135,6 @@ function App() {
           isSignedIn={isSignedIn}
           open={sidebarOpen}
           toggleSideBar={toggleSidebar}
-          handleSignIn={handleSignIn}
           handleOpenSignUp={handleOpenSignUpModal}
         />
         <Routes>
@@ -173,7 +180,7 @@ function App() {
 
       {activeModal === "signup" && (
         <Modal onClose={toggleModalClose} title="Sign Up">
-          <SignUpModal></SignUpModal>
+          <SignUpModal handleSignUp={handleSignUp}></SignUpModal>
         </Modal>
       )}
     </div>

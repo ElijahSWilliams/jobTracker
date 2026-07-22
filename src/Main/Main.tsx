@@ -1,4 +1,4 @@
-import type { Jobs } from "../Constants/Constants";
+import type { Jobs } from "../Utils/Constants";
 import "./Main.css";
 
 /* PLACEHOLDER STATS */

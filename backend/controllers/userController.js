@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken"); 
 const User = require("../models/user"); //import user schema 
 const { JWT_SECRET } = require("../utils/config");
+const bcrypt = require("bcryptjs");
 const ServerError = require("../utils/ServerError");
 const BadRequestError = require("../utils/BadRequestError");
 const NotFoundError = require("../utils/NotFoundError");
@@ -21,7 +22,7 @@ const createUser = (req, res, next) => {
         return bcrypt.hash(password, 10);
     })
     .then((hashedPassword) => {
-        User.create({name, email, password: hashedPassword})
+       return User.create({name, email, password: hashedPassword})
     })
     .then((userInfo) => {
         const userWithoutPassword = userInfo.toObject();

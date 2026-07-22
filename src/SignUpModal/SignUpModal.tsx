@@ -1,19 +1,26 @@
 import "./SignUpModal.css";
 import { useState } from "react";
 
-type SignUpModalProps = {};
+type SignUpModalProps = {
+    handleSignUp: (userData) => void;
+};
 
-export default function SignUpModal({ }: SignUpModalProps) {
+export default function SignUpModal({ handleSignUp }: SignUpModalProps) {
     /* State */
     const [name, setName] = useState("")
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleSignUp = (e) => {
-        e.preventDefault();
-        console.log(e)
+    const handleNameChange = (e) => setName(e.target.value)
+    const handleEmailChange = (e) => setEmail(e.target.value)
+    const handlePasswordChange = (e) => setPassword(e.target.value)
 
-        //make api call 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(name, email, password)
+
+        //make api call  
+        handleSignUp({ name, email, password })
 
     }
 
@@ -21,10 +28,10 @@ export default function SignUpModal({ }: SignUpModalProps) {
     return (
         <div className="signup">
 
-            <form onSubmit={(e) => handleSignUp(e)}>
-                <input type="text" placeholder="username" value={name} onChange={(e) => setName(e.currentTarget.value)}></input>
-                <input type="text" placeholder="email" value={email} onChange={(e) => setEmail(e.currentTarget.value)}></input>
-                <input type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.currentTarget.value)}></input>
+            <form onSubmit={handleSubmit}>
+                <input type="text" placeholder="username" value={name} onChange={handleNameChange}></input>
+                <input type="text" placeholder="email" value={email} onChange={handleEmailChange}></input>
+                <input type="password" placeholder="password" value={password} onChange={handlePasswordChange}></input>
                 <button type="submit">Sign Up</button>
             </form>
         </div >

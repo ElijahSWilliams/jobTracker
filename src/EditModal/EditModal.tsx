@@ -1,5 +1,5 @@
 import "./EditModal.css";
-import type { Jobs, JobForm } from "../Constants/Constants";
+import type { Jobs, JobForm } from "../Utils/Constants";
 import { useState } from "react";
 import type { SyntheticEvent } from "react";
 
