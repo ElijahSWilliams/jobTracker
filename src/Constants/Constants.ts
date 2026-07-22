@@ -1,3 +1,6 @@
+
+export const baseURL = "http://localhost:3005/"
+
 export type Jobs = {
     id: string;
     company: string;

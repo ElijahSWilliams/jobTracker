@@ -6,7 +6,7 @@ import Profile from "./Profile/Profile";
 import AddJob from "./addJobModal/AddJob";
 import profileImage from "./assets/hero.png";
 import { Routes, Route } from "react-router-dom";
-import { initialJobs, type Jobs } from "./Data/jobs";
+import { initialJobs, type Jobs } from "./Constants/Constants";
 import Modal from "./Modal/Modal";
 import JobModal from "./JobModal/JobModal";
 import EditModal from "./EditModal/EditModal";

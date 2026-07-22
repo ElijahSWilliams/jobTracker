@@ -1,13 +1,13 @@
-import type { Jobs } from "../Data/jobs";
+import type { Jobs } from "../Constants/Constants";
 import "./JobModal.css";
 
 
 type JobModalProps = {
-    job: Jobs; 
-    handleDeleteJob: (jobID: string) => void;  
+    job: Jobs;
+    handleDeleteJob: (jobID: string) => void;
     handleOpenEditModal: () => void;
     handleEditJob: (jobID: string, updatedJob: Jobs) => void;
-    
+
 };
 
 export default function JobModal({ job, handleDeleteJob, handleOpenEditModal, handleEditJob }: JobModalProps) {

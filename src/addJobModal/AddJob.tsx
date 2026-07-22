@@ -1,5 +1,5 @@
 import "./AddJob.css";
-import type { Jobs, JobForm } from "../Data/jobs";
+import type { Jobs, JobForm } from "../Constants/Constants";
 import { useState } from "react";
 
 type AddJobProps = {
