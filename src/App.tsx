@@ -19,7 +19,10 @@ function App() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [selectedJob, setSelectedJob] = useState<Jobs | null>(null);
   const [isSignedIn, setIsSignedIn] = useState(false); //user sign in state 
-  const [currentUser, setCurrentUser] = useState(null); //user data state
+  const [currentUser, setCurrentUser] = useState(() => {
+    const storedUser = localStorage.getItem("currentUser");
+    return storedUser ? JSON.parse(storedUser) : null;
+  }); //user data state
 
   //search for jobs in local storage, if not found use initialJobs
   const [jobs, setJobs] = useState<Jobs[]>(() => {
@@ -96,8 +99,11 @@ function App() {
     signUp(userData)
       .then((res) => {
         console.log('Data:', res);
-        //setCurrentUser(userData) 
-        //setSigned in to true. isSignedIn(true);
+        console.log('userData:', res);
+        setCurrentUser(userData); 
+        localStorage.setItem("currentUser", JSON.stringify(userData));
+       /*  localStorage.setItem("jwt", res.token); */
+        setIsSignedIn(true);
       })
 
   }

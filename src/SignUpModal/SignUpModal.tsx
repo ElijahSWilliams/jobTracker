@@ -1,5 +1,6 @@
 import "./SignUpModal.css";
-import { useState } from "react";
+import { useState, useContext } from "react"; 
+import { CurrentUserContext } from "../Context/Context.js";
 
 type SignUpModalProps = {
     handleSignUp: (userData) => void; 
@@ -14,16 +15,21 @@ export default function SignUpModal({ handleSignUp, toggleCloseModal }: SignUpMo
 
     const handleNameChange = (e) => setName(e.target.value)
     const handleEmailChange = (e) => setEmail(e.target.value)
-    const handlePasswordChange = (e) => setPassword(e.target.value)
+    const handlePasswordChange = (e) => setPassword(e.target.value) 
+
+    const {currentUser, setCurrentUser} = useContext(CurrentUserContext); 
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(name, email, password)
-
-        //make api call  
-        handleSignUp({ name, email, password })
-        toggleCloseModal();
+            //make api call  
+            handleSignUp({ name, email, password }) 
+            
+            toggleCloseModal(); 
     }
+
+
 
 
     return (
