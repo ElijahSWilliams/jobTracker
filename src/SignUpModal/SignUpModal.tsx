@@ -29,9 +29,9 @@ export default function SignUpModal({ handleSignUp, toggleCloseModal }: SignUpMo
     return (
         <div className="signup">
             <form onSubmit={handleSubmit}>
-                <input className="signup__modal-form-input" type="text" placeholder="username" value={name} onChange={handleNameChange}></input>
-                <input className="signup__modal-form-input" type="text" placeholder="email" value={email} onChange={handleEmailChange}></input>
-                <input className="signup__modal-form-input" type="password" placeholder="password" value={password} onChange={handlePasswordChange}></input>
+                <input className="signup__modal-form-input" type="text" placeholder="username" required value={name} onChange={handleNameChange}></input>
+                <input className="signup__modal-form-input" type="text" placeholder="email" required value={email} onChange={handleEmailChange}></input>
+                <input className="signup__modal-form-input" type="password" placeholder="password" required value={password} onChange={handlePasswordChange}></input>
                 <button type="submit">Sign Up</button>
             </form>
         </div >

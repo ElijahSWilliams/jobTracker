@@ -11,7 +11,8 @@ import Modal from "./Modal/Modal";
 import JobModal from "./JobModal/JobModal";
 import EditModal from "./EditModal/EditModal";
 import SignUpModal from "./SignUpModal/SignUpModal";
-import signUp from "./Utils/Auth";
+import signUp from "./Utils/Auth"; 
+import CurrentUserContext from "./Context/Context";
 
 function App() {
   const [sidebarOpen, setSideBarOpen] = useState(true);
@@ -130,7 +131,7 @@ function App() {
 
   return (
     <div className="app"> 
-    <currentUserContext.Provider value={{ isSignedIn, setIsSignedIn }}>
+    <CurrentUserContext.Provider value={{ isSignedIn, setIsSignedIn }}>
       <Profile
         open={sidebarOpen}
         name="Elijah"
@@ -192,7 +193,7 @@ function App() {
           <SignUpModal handleSignUp={handleSignUp} toggleCloseModal={toggleModalClose} />
         </Modal>
       )} 
-      <CurrentUserContext.Provider>
+      </CurrentUserContext.Provider>
     </div>
   );
 }
