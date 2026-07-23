@@ -2,10 +2,11 @@ import "./SignUpModal.css";
 import { useState } from "react";
 
 type SignUpModalProps = {
-    handleSignUp: (userData) => void;
+    handleSignUp: (userData) => void; 
+    toggleCloseModal: () => void;
 };
 
-export default function SignUpModal({ handleSignUp }: SignUpModalProps) {
+export default function SignUpModal({ handleSignUp, toggleCloseModal }: SignUpModalProps) {
     /* State */
     const [name, setName] = useState("")
     const [email, setEmail] = useState("");
@@ -21,7 +22,7 @@ export default function SignUpModal({ handleSignUp }: SignUpModalProps) {
 
         //make api call  
         handleSignUp({ name, email, password })
-
+        toggleCloseModal();
     }
 
 

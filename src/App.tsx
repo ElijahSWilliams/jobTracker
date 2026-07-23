@@ -129,7 +129,8 @@ function App() {
   ];
 
   return (
-    <div className="app">
+    <div className="app"> 
+    <currentUserContext.Provider value={{ isSignedIn, setIsSignedIn }}>
       <Profile
         open={sidebarOpen}
         name="Elijah"
@@ -188,9 +189,10 @@ function App() {
 
       {activeModal === "signup" && (
         <Modal onClose={toggleModalClose} title="Sign Up">
-          <SignUpModal handleSignUp={handleSignUp}></SignUpModal>
+          <SignUpModal handleSignUp={handleSignUp} toggleCloseModal={toggleModalClose} />
         </Modal>
-      )}
+      )} 
+      <CurrentUserContext.Provider>
     </div>
   );
 }
