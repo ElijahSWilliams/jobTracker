@@ -27,11 +27,10 @@ export default function SignUpModal({ handleSignUp }: SignUpModalProps) {
 
     return (
         <div className="signup">
-
             <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="username" value={name} onChange={handleNameChange}></input>
-                <input type="text" placeholder="email" value={email} onChange={handleEmailChange}></input>
-                <input type="password" placeholder="password" value={password} onChange={handlePasswordChange}></input>
+                <input className="signup__modal-form-input" type="text" placeholder="username" value={name} onChange={handleNameChange}></input>
+                <input className="signup__modal-form-input" type="text" placeholder="email" value={email} onChange={handleEmailChange}></input>
+                <input className="signup__modal-form-input" type="password" placeholder="password" value={password} onChange={handlePasswordChange}></input>
                 <button type="submit">Sign Up</button>
             </form>
         </div >
