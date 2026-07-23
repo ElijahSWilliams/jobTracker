@@ -1,4 +1,6 @@
-import "./Header.css";
+import "./Header.css"; 
+import { useContext } from "react";
+import { CurrentUserContext } from "../Context/Context.js";
 
 type HeaderProps = {
   isSignedIn: boolean;
@@ -9,6 +11,8 @@ type HeaderProps = {
 };
 
 function Header({ isSignedIn, toggleSideBar, handleOpenSignUp, open }: HeaderProps) {
+  const { currentUser } = useContext(CurrentUserContext);
+
   return (
     <div className="header">
       <h1 className="header__title">Job Tracker</h1>

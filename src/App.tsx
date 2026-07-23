@@ -12,13 +12,14 @@ import JobModal from "./JobModal/JobModal";
 import EditModal from "./EditModal/EditModal";
 import SignUpModal from "./SignUpModal/SignUpModal";
 import signUp from "./Utils/Auth"; 
-import CurrentUserContext from "./Context/Context";
+import { CurrentUserContext } from "./Context/Context.js";
 
 function App() {
   const [sidebarOpen, setSideBarOpen] = useState(true);
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [selectedJob, setSelectedJob] = useState<Jobs | null>(null);
-  const [isSignedIn, setIsSignedIn] = useState(false); //user sign in state
+  const [isSignedIn, setIsSignedIn] = useState(false); //user sign in state 
+  const [currentUser, setCurrentUser] = useState(null); //user data state
 
   //search for jobs in local storage, if not found use initialJobs
   const [jobs, setJobs] = useState<Jobs[]>(() => {
@@ -131,7 +132,7 @@ function App() {
 
   return (
     <div className="app"> 
-    <CurrentUserContext.Provider value={{ isSignedIn, setIsSignedIn }}>
+    <CurrentUserContext.Provider value={{ isSignedIn, setIsSignedIn, currentUser, setCurrentUser }}>
       <Profile
         open={sidebarOpen}
         name="Elijah"
