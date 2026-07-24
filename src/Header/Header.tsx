@@ -1,16 +1,16 @@
 import "./Header.css"; 
-import { useContext } from "react";
-import { CurrentUserContext } from "../Context/Context.js";
+import { useContext } from "react"; 
+import { CurrentUserContext } from "../Context/Context.js"; 
+
 
 type HeaderProps = {
- 
   toggleSideBar: () => void;
   open: boolean;
-
   handleOpenSignUp: () => void;
+  handleOpenLoginModal: () => void;
 };
 
-function Header({  toggleSideBar, handleOpenSignUp, open }: HeaderProps) {
+function Header({  toggleSideBar, handleOpenSignUp, handleOpenLoginModal, open }: HeaderProps) {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext); 
 
 const handleAuthButtonCLick = () => {
@@ -22,7 +22,7 @@ const handleAuthButtonCLick = () => {
     window.location.reload();
   } else {
     //open signUp Modal
-    handleOpenSignUp(); 
+    handleOpenLoginModal();
  } //end else
 }//end button click function
 
@@ -32,7 +32,7 @@ const handleAuthButtonCLick = () => {
       <button className="header__account-btn" onClick={handleAuthButtonCLick}>
         {currentUser ? "Logout" : "Login"}
       </button> 
-      <button className={currentUser ? "header__signup-btn-hidden" : "header__signup-btn"} onClick={() =>alert("Sign Up functionality coming soon!")}>
+      <button className={currentUser ? "header__signup-btn-hidden" : "header__signup-btn"} onClick={() => handleOpenSignUp()}>
         {currentUser ? "" : "Sign Up"}
       </button>
 

@@ -10,7 +10,8 @@ import { initialJobs, type Jobs } from "./Utils/Constants";
 import Modal from "./Modal/Modal";
 import JobModal from "./JobModal/JobModal";
 import EditModal from "./EditModal/EditModal";
-import SignUpModal from "./SignUpModal/SignUpModal";
+import SignUpModal from "./SignUpModal/SignUpModal"; 
+import LoginModal from "./LoginModal/LoginModal";
 import { signUp } from "./Utils/Auth.js";
 import { CurrentUserContext } from "./Context/Context.js";
 
@@ -65,6 +66,10 @@ function App() {
 
   const handleOpenSignUpModal = () => {
     setActiveModal("signup");
+  }; 
+
+    const handleOpenLoginModal = () => {
+    setActiveModal("login");
   };
 
 
@@ -153,7 +158,8 @@ function App() {
           isSignedIn={isSignedIn}
           open={sidebarOpen}
           toggleSideBar={toggleSidebar}
-          handleOpenSignUp={handleOpenSignUpModal}
+          handleOpenSignUp={handleOpenSignUpModal} 
+          handleOpenLoginModal={handleOpenLoginModal}
         />
         <Routes>
           <Route
@@ -199,6 +205,13 @@ function App() {
       {activeModal === "signup" && (
         <Modal onClose={toggleModalClose} title="Sign Up">
           <SignUpModal handleSignUp={handleSignUp} toggleCloseModal={toggleModalClose} />
+        </Modal>
+      )}  
+
+
+      {activeModal === "login" && (
+        <Modal onClose={toggleModalClose} title="Login">
+          <LoginModal handleLogin={() => alert("Placeholder Login Function")} toggleCloseModal={toggleModalClose} />
         </Modal>
       )} 
       </CurrentUserContext.Provider>
