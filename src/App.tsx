@@ -17,7 +17,8 @@ import { CurrentUserContext } from "./Context/Context.js";
 function App() {
   const [sidebarOpen, setSideBarOpen] = useState(true);
   const [activeModal, setActiveModal] = useState<string | null>(null);
-  const [selectedJob, setSelectedJob] = useState<Jobs | null>(null);
+  const [selectedJob, setSelectedJob] = useState<Jobs | null>(null); 
+  const [authModalOpen, setAuthModalOpen] = useState<"login" | "signup" | null>("login");
   const [isSignedIn, setIsSignedIn] = useState(false); //user sign in state 
   const [currentUser, setCurrentUser] = useState(() => {
     const storedUser = localStorage.getItem("currentUser");

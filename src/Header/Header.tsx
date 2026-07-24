@@ -30,7 +30,10 @@ const handleAuthButtonCLick = () => {
     <div className="header">
       <h1 className="header__title">Job Tracker</h1>
       <button className="header__account-btn" onClick={handleAuthButtonCLick}>
-        {currentUser ? "Logout" : "Sign Up"}
+        {currentUser ? "Logout" : "Login"}
+      </button> 
+      <button className={currentUser ? "header__signup-btn-hidden" : "header__signup-btn"} onClick={() =>alert("Sign Up functionality coming soon!")}>
+        {currentUser ? "" : "Sign Up"}
       </button>
 
       {/* Displays only on mobile */}
