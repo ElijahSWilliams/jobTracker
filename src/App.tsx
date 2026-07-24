@@ -11,7 +11,7 @@ import Modal from "./Modal/Modal";
 import JobModal from "./JobModal/JobModal";
 import EditModal from "./EditModal/EditModal";
 import SignUpModal from "./SignUpModal/SignUpModal";
-import signUp from "./Utils/Auth"; 
+import { signUp } from "./Utils/Auth.js";
 import { CurrentUserContext } from "./Context/Context.js";
 
 function App() {
