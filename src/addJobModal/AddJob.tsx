@@ -5,10 +5,11 @@ import { useState } from "react";
 type AddJobProps = {
     toggleModalClose: () => void;
     addJob: (job: Jobs) => void;
+    handleCreateJob: (jobData) => void;
 };
 
 
-function AddJob({ toggleModalClose, addJob }: AddJobProps) {
+function AddJob({ toggleModalClose, addJob, handleCreateJob }: AddJobProps) {
 
     const [formData, setFormData] = useState<JobForm>({
         company: "",
@@ -27,7 +28,7 @@ function AddJob({ toggleModalClose, addJob }: AddJobProps) {
             ...formData,
             dateAdded: new Date().toLocaleDateString(),
         }
-
+        handleCreateJob(newJob);
         addJob(newJob);
         toggleModalClose();
     }

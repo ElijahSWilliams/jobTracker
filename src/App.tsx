@@ -127,6 +127,12 @@ function App() {
       })
   }
 
+  const handleCreateJob = ({ company, position, dateAdded, status }) => { //addJobModal
+    console.log(company, position, dateAdded, status);
+
+    console.log()
+  }
+
   /* Statistics. Passed to profile and Main */
   const statistics = [
     {
@@ -194,7 +200,7 @@ function App() {
         {/* Conditional Rendering */}
         {activeModal === "addJob" && (
           <Modal onClose={toggleModalClose} title="Add Job">
-            <AddJob toggleModalClose={toggleModalClose} addJob={addJob} />
+            <AddJob toggleModalClose={toggleModalClose} addJob={addJob} handleCreateJob={handleCreateJob} />
           </Modal>
         )}
 

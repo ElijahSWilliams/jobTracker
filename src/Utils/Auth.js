@@ -30,4 +30,16 @@ export function getCurrentUser(token) { //take in token
   }).then((res) => {
     return checkResponse(res);
   })
+} 
+
+export function createJob({company, position, dateAdded, status}, token) {
+  return fetch(`${baseURL}/jobs`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  }),then((res) => {
+    return checkResponse(res);
+  })
 }
