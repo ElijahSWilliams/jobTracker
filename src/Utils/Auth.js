@@ -21,7 +21,7 @@ export function signIn({ email, password }) {
   });
 }
 
-export function getCurrentUser({token}) { //take in token
+export function getCurrentUser(token) { //take in token
   return fetch(`${baseURL}/users/me`, { //make a fetch request 
     method: "GET", 
     headers: {

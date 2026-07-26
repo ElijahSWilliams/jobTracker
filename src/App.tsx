@@ -119,10 +119,8 @@ function App() {
     signIn(userData)
       .then((res) => {
         localStorage.setItem("jwt", res.token); //set token
-        console.log("Login Res:", res);
         return getCurrentUser(res.token); //pass token to function to get user
       }).then((user) => {
-        console.log('getCurrentUserRes:', user) //console.log user
         setCurrentUser(user)
         localStorage.setItem('currentUser', JSON.stringify(user))
         setIsSignedIn(true);
