@@ -1,5 +1,6 @@
 import "./LoginModal.css";  
-import { useState } from "react";
+import { useState } from "react"; 
+import {signIn} from "../Utils/Auth.js";
 
 type LoginModalProps = {
     handleLogin: (userData) => void;
@@ -15,16 +16,20 @@ export default function LoginModal({ handleLogin, toggleCloseModal }: LoginModal
     const handleEmailChange = (e) => setEmail(e.target.value)
     const handlePasswordChange = (e) => setPassword(e.target.value)
 
+
+
     const handleSubmitLogin = (e) => {
     e.preventDefault();
-    console.log(email, password);
-}
+    console.log(email, password); 
+        //make api call  
+        handleLogin({email, password})
+        toggleCloseModal();
+} 
 
 
     return (
          <div className="signup">
             <form onSubmit={handleSubmitLogin}>
-               
                 <input className="signup__modal-form-input" type="text" placeholder="email" required value={email} onChange={handleEmailChange}></input>
                 <input className="signup__modal-form-input" type="password" placeholder="password" required value={password} onChange={handlePasswordChange}></input>
                 <button type="submit">Login</button>

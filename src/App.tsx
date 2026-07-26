@@ -10,15 +10,16 @@ import { initialJobs, type Jobs } from "./Utils/Constants";
 import Modal from "./Modal/Modal";
 import JobModal from "./JobModal/JobModal";
 import EditModal from "./EditModal/EditModal";
-import SignUpModal from "./SignUpModal/SignUpModal"; 
+import SignUpModal from "./SignUpModal/SignUpModal";
 import LoginModal from "./LoginModal/LoginModal";
-import { signUp } from "./Utils/Auth.js";
+import { signUp, signIn, getCurrentUser } from "./Utils/Auth.js";
 import { CurrentUserContext } from "./Context/Context.js";
+
 
 function App() {
   const [sidebarOpen, setSideBarOpen] = useState(true);
   const [activeModal, setActiveModal] = useState<string | null>(null);
-  const [selectedJob, setSelectedJob] = useState<Jobs | null>(null); 
+  const [selectedJob, setSelectedJob] = useState<Jobs | null>(null);
   const [authModalOpen, setAuthModalOpen] = useState<"login" | "signup" | null>("login");
   const [isSignedIn, setIsSignedIn] = useState(false); //user sign in state 
   const [currentUser, setCurrentUser] = useState(() => {
@@ -66,12 +67,11 @@ function App() {
 
   const handleOpenSignUpModal = () => {
     setActiveModal("signup");
-  }; 
-
-    const handleOpenLoginModal = () => {
-    setActiveModal("login");
   };
 
+  const handleOpenLoginModal = () => {
+    setActiveModal("login");
+  };
 
   const toggleModalClose = () => {
     setActiveModal("null");
@@ -106,12 +106,27 @@ function App() {
       .then((res) => {
         console.log('Data:', res);
         console.log('userData:', res);
-        setCurrentUser(userData); 
+        setCurrentUser(userData);
         localStorage.setItem("currentUser", JSON.stringify(userData));
-       /*  localStorage.setItem("jwt", res.token); */
+        /*  localStorage.setItem("jwt", res.token); */
         setIsSignedIn(true);
       })
 
+  }
+
+  const handleLogin = (userData) => {
+    console.log("Loggin In", userData);
+    signIn(userData)
+      .then((res) => {
+        localStorage.setItem("jwt", res.token); //set token
+        console.log("Login Res:", res);
+        return getCurrentUser(res.token); //pass token to function to get user
+      }).then((user) => {
+        console.log('getCurrentUserRes:', user) //console.log user
+        setCurrentUser(user)
+        localStorage.setItem('currentUser', JSON.stringify(user))
+        setIsSignedIn(true);
+      })
   }
 
   /* Statistics. Passed to profile and Main */
@@ -143,77 +158,77 @@ function App() {
   ];
 
   return (
-    <div className="app"> 
-    <CurrentUserContext.Provider value={{ isSignedIn, setIsSignedIn, currentUser, setCurrentUser }}>
-      <Profile
-        open={sidebarOpen}
-        name="Elijah"
-        toggleSidebar={toggleSidebar}
-        image={profileImage}
-        stats={statistics}
-      />
-
-      <div className="app__main">
-        <Header
-          isSignedIn={isSignedIn}
+    <div className="app">
+      <CurrentUserContext.Provider value={{ isSignedIn, setIsSignedIn, currentUser, setCurrentUser }}>
+        <Profile
           open={sidebarOpen}
-          toggleSideBar={toggleSidebar}
-          handleOpenSignUp={handleOpenSignUpModal} 
-          handleOpenLoginModal={handleOpenLoginModal}
+          name="Elijah"
+          toggleSidebar={toggleSidebar}
+          image={profileImage}
+          stats={statistics}
         />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Main
-                viewJob={viewJob}
-                toggleModalOpen={toggleModalOpen}
-                jobs={jobs}
-              />
-            }
-          />
 
-          {/* <section></section>
+        <div className="app__main">
+          <Header
+            isSignedIn={isSignedIn}
+            open={sidebarOpen}
+            toggleSideBar={toggleSidebar}
+            handleOpenSignUp={handleOpenSignUpModal}
+            handleOpenLoginModal={handleOpenLoginModal}
+          />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  viewJob={viewJob}
+                  toggleModalOpen={toggleModalOpen}
+                  jobs={jobs}
+                />
+              }
+            />
+
+            {/* <section></section>
           <section></section> */}
-        </Routes>
-      </div>
+          </Routes>
+        </div>
 
-      {/* Conditional Rendering */}
-      {activeModal === "addJob" && (
-        <Modal onClose={toggleModalClose} title="Add Job">
-          <AddJob toggleModalClose={toggleModalClose} addJob={addJob} />
-        </Modal>
-      )}
+        {/* Conditional Rendering */}
+        {activeModal === "addJob" && (
+          <Modal onClose={toggleModalClose} title="Add Job">
+            <AddJob toggleModalClose={toggleModalClose} addJob={addJob} />
+          </Modal>
+        )}
 
-      {activeModal === "jobDetails" && (
-        <Modal onClose={toggleModalClose} title="Job Details">
-          <JobModal
-            job={selectedJob}
-            handleOpenEditModal={handleOpenEditModal}
-            handleDeleteJob={handleDeleteJob}
-            handleEditJob={handleEditJob}
-          />
-        </Modal>
-      )}
+        {activeModal === "jobDetails" && (
+          <Modal onClose={toggleModalClose} title="Job Details">
+            <JobModal
+              job={selectedJob}
+              handleOpenEditModal={handleOpenEditModal}
+              handleDeleteJob={handleDeleteJob}
+              handleEditJob={handleEditJob}
+            />
+          </Modal>
+        )}
 
-      {activeModal === "editJob" && (
-        <Modal onClose={toggleModalClose} title="Edit Job">
-          <EditModal job={selectedJob} handleEditJob={handleEditJob} />
-        </Modal>
-      )}
+        {activeModal === "editJob" && (
+          <Modal onClose={toggleModalClose} title="Edit Job">
+            <EditModal job={selectedJob} handleEditJob={handleEditJob} />
+          </Modal>
+        )}
 
-      {activeModal === "signup" && (
-        <Modal onClose={toggleModalClose} title="Sign Up">
-          <SignUpModal handleSignUp={handleSignUp} toggleCloseModal={toggleModalClose} />
-        </Modal>
-      )}  
+        {activeModal === "signup" && (
+          <Modal onClose={toggleModalClose} title="Sign Up">
+            <SignUpModal handleSignUp={handleSignUp} toggleCloseModal={toggleModalClose} />
+          </Modal>
+        )}
 
 
-      {activeModal === "login" && (
-        <Modal onClose={toggleModalClose} title="Login">
-          <LoginModal handleLogin={() => alert("Placeholder Login Function")} toggleCloseModal={toggleModalClose} />
-        </Modal>
-      )} 
+        {activeModal === "login" && (
+          <Modal onClose={toggleModalClose} title="Login">
+            <LoginModal handleLogin={handleLogin} toggleCloseModal={toggleModalClose} />
+          </Modal>
+        )}
       </CurrentUserContext.Provider>
     </div>
   );

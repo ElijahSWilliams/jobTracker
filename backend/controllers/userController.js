@@ -119,7 +119,8 @@ const getCurrentUser = (req, res, next) => {
         });
         return res.status(200).send({ token }); // success
       })
-      .catch((err) => {
+      .catch((err) => { 
+        console.log(err)
         if (err.message === "Incorrect Email or Password") {
           return next(new UnauthorizedError("Incorrect Email or Password"));
         }
