@@ -118,12 +118,20 @@ function App() {
     console.log("Loggin In", userData);
     signIn(userData)
       .then((res) => {
-        localStorage.setItem("jwt", res.token); //set token
+       localStorage.setItem("jwt", res.token); //set token 
         return getCurrentUser(res.token); //pass token to function to get user
       }).then((user) => {
         setCurrentUser(user)
-        localStorage.setItem("currentUser", JSON.stringify(user))
-        setIsSignedIn(true);
+        const token = localStorage.getItem("jwt") //get token
+        localStorage.setItem("currentUser", JSON.stringify(user)) 
+        setIsSignedIn(true); 
+        //make api call for jobs 
+        getJobs(token).then((jobs) => {
+        localStorage.setItem("jobs", JSON.stringify(jobs));
+        setJobs(jobs)
+        }).catch((err) => {
+          console.error(err);
+        })
       })
   }
 
@@ -135,6 +143,9 @@ function App() {
     createJob(jobData, token).then((newJob) => {
       console.log(newJob)
       setJobs((prevJobs) => [...prevJobs, newJob])
+    })
+    .catch((err) => {
+      console.error(err);
     })
   }
 
