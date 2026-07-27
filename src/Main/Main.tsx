@@ -1,5 +1,7 @@
 import type { Jobs } from "../Utils/Constants";
 import "./Main.css";
+import { CurrentUserContext } from "../Context/Context.js"  
+import { useContext } from "react"
 
 /* PLACEHOLDER STATS */
 
@@ -9,7 +11,9 @@ type MainProps = {
     jobs: Jobs[];
 };
 
-function Main({ toggleModalOpen, viewJob, jobs }: MainProps) {
+function Main({ toggleModalOpen, viewJob, jobs }: MainProps) { 
+
+    const { currentUser } = useContext(CurrentUserContext)
 
     const appliedJobs = jobs.filter(job => job.status === "Applied");
     const interviewJobs = jobs.filter(job => job.status === "Interviewing");
@@ -23,7 +27,7 @@ function Main({ toggleModalOpen, viewJob, jobs }: MainProps) {
         <div className="main">
             <div className="main__header">
                 <h1 className="main__title">Stats</h1>
-                <button onClick={toggleModalOpen} className="main__add-button"> + Add Job</button>
+                <button onClick={toggleModalOpen} className={ currentUser ? "main__add-button" : "main__add-button-hide"}> + Add Job</button>
             </div>
 
             {/* Boxes */}
