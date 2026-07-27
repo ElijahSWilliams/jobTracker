@@ -28,6 +28,8 @@ function App() {
 
   //search for jobs in local storage, if not found use initialJobs
   const [jobs, setJobs] = useState<Jobs[]>([]) 
+
+
   
   useEffect(() => {
     localStorage.setItem("jobs", JSON.stringify(jobs));
@@ -36,12 +38,13 @@ function App() {
 
   //get jobs on load
   useEffect(() => {
-    const token = localStorage.getItem("jwt");
+    const token = localStorage.getItem("jwt"); 
 
     if (!token) return;
 
     getJobs(token)
-      .then((jobs) => {
+      .then((jobs) => { 
+        localStorage.setItem("jobs", JSON.stringify(jobs));
         setJobs(jobs)
       })
       .catch((err) => {

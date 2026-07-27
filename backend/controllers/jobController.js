@@ -22,9 +22,21 @@ const createJob = (req, res, next) => {
     }).then((job) => {
         res.status(201).send(job) //send job
     }).catch(next);
-} 
+}  
+
+const getJobs = (req, res, next) => {
+    Job.find({user: req.user._id}) //find jobs that contain current users id
+    .then((jobs) => {
+        res.status(200).send(jobs);
+    })
+    .catch((err) => {
+        console.error(err);
+    })
+}
+
 
 
 module.exports = {
     createJob,
+    getJobs,
 }
