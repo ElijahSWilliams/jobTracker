@@ -27,19 +27,8 @@ function App() {
   }); //user data state
 
   //search for jobs in local storage, if not found use initialJobs
-  const [jobs, setJobs] = useState<Jobs[]>(() => {
-    //begin arrow function
-
-    try {
-      /* const storedJobs = localStorage.getItem("jobs");
-      return storedJobs ? JSON.parse(storedJobs) : initialJobs; */
-
-    } catch {
-      //else return initalJobs
-      return initialJobs;
-    } //end try/catch
-  }); //end arrow function
-
+  const [jobs, setJobs] = useState<Jobs[]>([]) 
+  
   useEffect(() => {
     localStorage.setItem("jobs", JSON.stringify(jobs));
   }, [jobs]);

@@ -18,7 +18,7 @@ function Main({ toggleModalOpen, viewJob, jobs }: MainProps) {
     const savedJobs = jobs.filter(job => job.status === "Saved")
 
 
-    console.log(savedJobs[0].dateAdded);
+    
     return (
         <div className="main">
             <div className="main__header">
