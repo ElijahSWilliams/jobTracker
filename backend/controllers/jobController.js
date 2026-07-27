@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken"); 
-const Job = require("../models/jobs"); //import user schema 
+/* const User = require("../model/user"); */
+const Job = require("../models/jobs"); //import job schema 
 const { JWT_SECRET } = require("../utils/config");
 const bcrypt = require("bcryptjs");
 const ServerError = require("../utils/ServerError");
@@ -32,6 +33,28 @@ const getJobs = (req, res, next) => {
     .catch((err) => {
         console.error(err);
     })
+} 
+
+const deleteJob = (req, res, next) => {
+    Job.findByIdAndDelete(req.params.jobID)
+    .then((job) => {
+        if (!job) {
+            throw new NotFoundError("Job Not Found")
+        } 
+
+        if (job.user.toString() !== req.user._id) {
+            throw new UnauthorizedError("You cannot delete this job")
+        } 
+
+        //else 
+        res.status(200).send(job);
+    })
+    .then((res) => {
+        res.send({message: "Job Deleted"})
+    })
+    .catch((err) => {
+        console.error(err);
+    })
 }
 
 
@@ -39,4 +62,5 @@ const getJobs = (req, res, next) => {
 module.exports = {
     createJob,
     getJobs,
+    deleteJob
 }

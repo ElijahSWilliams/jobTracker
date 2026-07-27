@@ -33,7 +33,7 @@ export function getCurrentUser(token) { //take in token
 } 
 
 export function createJob(jobData, token) { 
-  console.log("token", token)
+/*   console.log("token", token) */
   return fetch(`${baseURL}/jobs`, {
     method: "POST",
     headers: {
@@ -47,7 +47,7 @@ export function createJob(jobData, token) {
 } 
 
 export function getJobs(token) {
-  console.log("getJobs running"); 
+  /* console.log("getJobs running");  */
   return fetch(`${baseURL}/jobs`, {
     headers: {
       Authorization: `Bearer ${token}`
@@ -55,5 +55,18 @@ export function getJobs(token) {
   })
   .then((res) => {
     return checkResponse(res);
+  })
+} 
+
+export function deleteJob(jobID, token) {
+  /* console.log(`jobID: ${jobID}, token: ${token}`) */ 
+  return fetch(`${baseURL}/jobs/${jobID}`, { 
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+  .then((res) => {
+    return checkResponse(res)
   })
 }
