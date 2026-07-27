@@ -53,7 +53,7 @@ function Profile({ open, name, image, toggleSidebar, stats }: ProfileProps) {
         </label>
 
         {/* DISPLAY USER NAME */}
-        <h1 className="profile__name">Hello, {currentUser ? currentUser.name : "Guest"}</h1>
+        <h1 className="profile__name">{currentUser ? `Hello, ${currentUser.name}` : "Guest"}</h1>
 
         {/*  */}
         <div className="profile__stats">
