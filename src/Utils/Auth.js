@@ -21,7 +21,7 @@ export function signIn({ email, password }) {
   });
 }
 
-export function getCurrentUser(token) { //take in token
+export function getCurrentUser(token) { //take in token 
   return fetch(`${baseURL}/users/me`, { //make a fetch request 
     method: "GET", 
     headers: {
@@ -32,14 +32,28 @@ export function getCurrentUser(token) { //take in token
   })
 } 
 
-export function createJob({company, position, dateAdded, status}, token) {
+export function createJob(jobData, token) { 
+  console.log("token", token)
   return fetch(`${baseURL}/jobs`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`
+    }, 
+    body: JSON.stringify(jobData)
+  }).then((res) => {
+    return checkResponse(res);
+  })
+} 
+
+export function getJobs(token) {
+  console.log("getJobs running"); 
+  return fetch(`${baseURL}/jobs`, {
+    headers: {
+      Authorization: `Bearer ${token}`
     }
-  }),then((res) => {
+  })
+  .then((res) => {
     return checkResponse(res);
   })
 }

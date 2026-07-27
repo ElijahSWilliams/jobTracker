@@ -29,7 +29,7 @@ function AddJob({ toggleModalClose, addJob, handleCreateJob }: AddJobProps) {
             dateAdded: new Date().toLocaleDateString(),
         }
         handleCreateJob(newJob);
-        addJob(newJob);
+        /* addJob(newJob); */
         toggleModalClose();
     }
 

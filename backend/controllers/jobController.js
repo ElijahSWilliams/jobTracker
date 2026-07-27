@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken"); 
-const Job = require("../models/job"); //import user schema 
+const Job = require("../models/jobs"); //import user schema 
 const { JWT_SECRET } = require("../utils/config");
 const bcrypt = require("bcryptjs");
 const ServerError = require("../utils/ServerError");
@@ -10,15 +10,15 @@ const UnauthorizedError = require("../utils/UnauthorizedError");
 
 const createJob = (req, res, next) => {
     //get job info from req body
-    const {company, position, dateAdded, status } = req.body;  
+    const {company, position, status } = req.body;  
+    console.log("REQ BODY:", req.body)
 
     //create job
     Job.create({
         company,
         position,
-        dateAdded,
         status, 
-        owner: req.user._id //Add user id to job
+        user: req.user._id //Add user id to job
     }).then((job) => {
         res.status(201).send(job) //send job
     }).catch(next);

@@ -12,7 +12,7 @@ import JobModal from "./JobModal/JobModal";
 import EditModal from "./EditModal/EditModal";
 import SignUpModal from "./SignUpModal/SignUpModal";
 import LoginModal from "./LoginModal/LoginModal";
-import { signUp, signIn, getCurrentUser } from "./Utils/Auth.js";
+import { signUp, signIn, getCurrentUser, createJob, getJobs } from "./Utils/Auth.js";
 import { CurrentUserContext } from "./Context/Context.js";
 
 
@@ -20,7 +20,6 @@ function App() {
   const [sidebarOpen, setSideBarOpen] = useState(true);
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [selectedJob, setSelectedJob] = useState<Jobs | null>(null);
-  const [authModalOpen, setAuthModalOpen] = useState<"login" | "signup" | null>("login");
   const [isSignedIn, setIsSignedIn] = useState(false); //user sign in state 
   const [currentUser, setCurrentUser] = useState(() => {
     const storedUser = localStorage.getItem("currentUser");
@@ -32,8 +31,9 @@ function App() {
     //begin arrow function
 
     try {
-      const storedJobs = localStorage.getItem("jobs");
-      return storedJobs ? JSON.parse(storedJobs) : initialJobs;
+      /* const storedJobs = localStorage.getItem("jobs");
+      return storedJobs ? JSON.parse(storedJobs) : initialJobs; */
+
     } catch {
       //else return initalJobs
       return initialJobs;
@@ -44,12 +44,20 @@ function App() {
     localStorage.setItem("jobs", JSON.stringify(jobs));
   }, [jobs]);
 
+
+  //get jobs on load
   useEffect(() => {
     const token = localStorage.getItem("jwt");
-    if (token) {
-      console.log("Token FOund:", token);
 
-    }
+    if (!token) return;
+
+    getJobs(token)
+      .then((jobs) => {
+        setJobs(jobs)
+      })
+      .catch((err) => {
+        console.error(err);
+      })
   }, [])
 
   /* FUNCTIONS */
@@ -122,15 +130,20 @@ function App() {
         return getCurrentUser(res.token); //pass token to function to get user
       }).then((user) => {
         setCurrentUser(user)
-        localStorage.setItem('currentUser', JSON.stringify(user))
+        localStorage.setItem("currentUser", JSON.stringify(user))
         setIsSignedIn(true);
       })
   }
 
-  const handleCreateJob = ({ company, position, dateAdded, status }) => { //addJobModal
-    console.log(company, position, dateAdded, status);
-
-    console.log()
+  const handleCreateJob = (jobData) => { //addJobModal
+    const token = localStorage.getItem("jwt")
+    console.log("JobData:", jobData);
+    console.log("TOKEN:", token)
+    //make api call
+    createJob(jobData, token).then((newJob) => {
+      console.log(newJob)
+      setJobs((prevJobs) => [...prevJobs, newJob])
+    })
   }
 
   /* Statistics. Passed to profile and Main */
