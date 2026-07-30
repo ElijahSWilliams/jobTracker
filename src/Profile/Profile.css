@@ -140,7 +140,7 @@
   }
 
   .profile-closed {
-    /*   width: 40px; */
+      width: 40px;
   }
 }
 
@@ -150,8 +150,9 @@
     width: 100px;
   }
 
-  .profile__closed {
-    /* display: none; */
+  .profile-closed {
+    /* display: none; */ 
+    width: 40px;
   }
 }
 

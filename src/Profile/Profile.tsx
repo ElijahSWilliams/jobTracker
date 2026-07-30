@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"; 
+import { useContext, useState } from "react";
 import { CurrentUserContext } from "../Context/Context.js";
 import "./Profile.css";
 
@@ -17,9 +17,9 @@ type ProfileProps = {
 };
 
 function Profile({ open, name, image, toggleSidebar, stats }: ProfileProps) {
-  const [profileImage, setProfileImage] = useState(image); 
+  const [profileImage, setProfileImage] = useState(image);
 
-  const {currentUser} = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
   /* FUNCTIONS */
   function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -53,7 +53,7 @@ function Profile({ open, name, image, toggleSidebar, stats }: ProfileProps) {
         </label>
 
         {/* DISPLAY USER NAME */}
-        <h1 className="profile__name">{currentUser ? `Hello, ${currentUser.name}` : "Guest"}</h1>
+        <h1 className="profile__name">{currentUser ? `Hello, ${currentUser.name}` : "Sign In/Up"}</h1>
 
         {/*  */}
         <div className="profile__stats">
