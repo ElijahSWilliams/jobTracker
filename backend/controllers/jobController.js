@@ -55,13 +55,37 @@ const deleteJob = (req, res, next) => {
     })
     .catch((err) => {
         console.error(err);
-    })
+    }) 
 }
+
+    const updateJob = (req, res, next) => {
+        Job.findById(req.params.jobID) 
+        .then((job) => {
+            //if no job
+        if (!job) {
+            throw new NotFoundError("Job not found");
+        }
+
+        if (job.user.toString() !== req.user._id) {
+            throw new UnauthorizedError("You cannot delete this job")
+        }
+
+        return Job.findByIdAndUpdate(req.params.jobID)
+        })
+        .then((updatedJob) => {
+            res.status(200).send(updatedJob);
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+
 
 
 
 module.exports = {
     createJob,
     getJobs,
-    deleteJob
+    deleteJob, 
+    updateJob
 }

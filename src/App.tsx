@@ -12,7 +12,7 @@ import JobModal from "./JobModal/JobModal";
 import EditModal from "./EditModal/EditModal";
 import SignUpModal from "./SignUpModal/SignUpModal";
 import LoginModal from "./LoginModal/LoginModal";
-import { signUp, signIn, getCurrentUser, createJob, getJobs, deleteJob } from "./Utils/Auth.js";
+import { signUp, signIn, getCurrentUser, createJob, getJobs, deleteJob, updateJob } from "./Utils/Auth.js";
 import { CurrentUserContext } from "./Context/Context.js";
 
 
@@ -106,9 +106,19 @@ function App() {
   };
 
   const handleEditJob = (jobID: string, updatedJob: Jobs) => {
-    setJobs((prevJobs) =>
-      prevJobs.map((job) => (job.id === jobID ? updatedJob : job)),
-    );
+    //get token
+    const token = localStorage.getItem("jwt");
+
+    console.log(updatedJob)
+    //make api call
+    updateJob(jobID, updatedJob, token)
+      .then((res) => {
+        console.log(res)
+        setJobs((prevJobs) =>
+          prevJobs.map((job) => (job._id === jobID ? updatedJob : job)),
+        );
+      })//end api call
+
     console.log("Job Updated:", updatedJob);
     setActiveModal(null); //close modal after edits
   };

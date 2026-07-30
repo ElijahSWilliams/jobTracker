@@ -26,7 +26,7 @@ function EditModal({ job, handleEditJob }: EditModalProps) {
             ...formData,
         };
 
-        handleEditJob(job.id, updatedJob);
+        handleEditJob(job._id, updatedJob);
     }
 
 

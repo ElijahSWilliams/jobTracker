@@ -69,4 +69,20 @@ export function deleteJob(jobID, token) {
   .then((res) => {
     return checkResponse(res)
   })
+} 
+
+export function updateJob(jobID, updatedJob, token) {
+  // 
+  console.log(jobID)
+  return fetch(`${baseURL}/jobs/${jobID}`, {
+    method: "PATCH", 
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(updatedJob) //send new info 
+  })
+  .then((res) => {
+    return checkResponse(res);
+  })
 }
