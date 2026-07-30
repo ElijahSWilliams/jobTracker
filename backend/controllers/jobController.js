@@ -8,6 +8,7 @@ const BadRequestError = require("../utils/BadRequestError");
 const NotFoundError = require("../utils/NotFoundError");
 const ConflictError = require("../utils/ConflictError");
 const UnauthorizedError = require("../utils/UnauthorizedError"); 
+const { join } = require("path");
 
 const createJob = (req, res, next) => {
     //get job info from req body
@@ -36,7 +37,8 @@ const getJobs = (req, res, next) => {
 } 
 
 const deleteJob = (req, res, next) => {
-    Job.findByIdAndDelete(req.params.jobID)
+    
+    Job.findById(req.params.jobID)
     .then((job) => {
         if (!job) {
             throw new NotFoundError("Job Not Found")
@@ -44,13 +46,13 @@ const deleteJob = (req, res, next) => {
 
         if (job.user.toString() !== req.user._id) {
             throw new UnauthorizedError("You cannot delete this job")
-        } 
+        }  
 
-        //else 
-        res.status(200).send(job);
-    })
-    .then((res) => {
-        res.send({message: "Job Deleted"})
+        //return 
+        return Job.findByIdAndDelete(req.params.jobID)
+    
+    }).then((deletedJob) => {
+        res.status(200).send(deletedJob);
     })
     .catch((err) => {
         console.error(err);
