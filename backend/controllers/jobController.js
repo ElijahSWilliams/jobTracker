@@ -37,7 +37,6 @@ const getJobs = (req, res, next) => {
 } 
 
 const deleteJob = (req, res, next) => {
-    
     Job.findById(req.params.jobID)
     .then((job) => {
         if (!job) {

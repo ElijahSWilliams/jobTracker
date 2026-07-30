@@ -27,10 +27,10 @@ function App() {
   }); //user data state
 
   //search for jobs in local storage, if not found use initialJobs
-  const [jobs, setJobs] = useState<Jobs[]>([]) 
+  const [jobs, setJobs] = useState<Jobs[]>([])
 
 
-  
+
   useEffect(() => {
     localStorage.setItem("jobs", JSON.stringify(jobs));
   }, [jobs]);
@@ -38,12 +38,12 @@ function App() {
 
   //get jobs on load
   useEffect(() => {
-    const token = localStorage.getItem("jwt"); 
+    const token = localStorage.getItem("jwt");
 
     if (!token) return;
 
     getJobs(token)
-      .then((jobs) => { 
+      .then((jobs) => {
         localStorage.setItem("jobs", JSON.stringify(jobs));
         setJobs(jobs)
       })
@@ -51,6 +51,8 @@ function App() {
         console.error(err);
       })
   }, [])
+
+  console.log("MAIN JOBS:", jobs)
 
   /* FUNCTIONS */
   const toggleSidebar = () => {
@@ -89,13 +91,15 @@ function App() {
 
   const handleDeleteJob = (jobID: string) => {
     //get token
-    const token = localStorage.getItem("jwt") 
+    const token = localStorage.getItem("jwt")
     console.log("JOBID!!", jobID)
     //make api call 
     deleteJob(jobID, token).then((res) => {
-      console.log("res:", res) 
-      console.log("ID:", jobID); 
-      setJobs((prevJobs) => prevJobs.filter((job) => job.id !== jobID));    
+      console.log("res:", res)
+      console.log("ID:", jobID);
+    }).then(() => {
+      setJobs((prevJobs) => prevJobs.filter((job) => job._id !== jobID));
+      console.log(jobs)
     })
     //close modal
     setActiveModal("null");
@@ -127,17 +131,17 @@ function App() {
     console.log("Loggin In", userData);
     signIn(userData)
       .then((res) => {
-       localStorage.setItem("jwt", res.token); //set token 
+        localStorage.setItem("jwt", res.token); //set token 
         return getCurrentUser(res.token); //pass token to function to get user
       }).then((user) => {
         setCurrentUser(user)
         const token = localStorage.getItem("jwt") //get token
-        localStorage.setItem("currentUser", JSON.stringify(user)) 
-        setIsSignedIn(true); 
+        localStorage.setItem("currentUser", JSON.stringify(user))
+        setIsSignedIn(true);
         //make api call for jobs 
         getJobs(token).then((jobs) => {
-        localStorage.setItem("jobs", JSON.stringify(jobs));
-        setJobs(jobs)
+          localStorage.setItem("jobs", JSON.stringify(jobs));
+          setJobs(jobs)
         }).catch((err) => {
           console.error(err);
         })
@@ -153,9 +157,9 @@ function App() {
       console.log(newJob)
       setJobs((prevJobs) => [...prevJobs, newJob])
     })
-    .catch((err) => {
-      console.error(err);
-    })
+      .catch((err) => {
+        console.error(err);
+      })
   }
 
   /* Statistics. Passed to profile and Main */
