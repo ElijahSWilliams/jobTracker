@@ -1,5 +1,5 @@
 
-export const baseURL = "http://localhost:3005"
+export const baseURL = "https://elijahswilliams.github.io/jobTracker/"
 
 export type Jobs = {
     id: string;
