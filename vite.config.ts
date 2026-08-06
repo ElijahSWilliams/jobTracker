@@ -7,5 +7,5 @@ export default defineConfig({
   server: {
     port: 2001,
   },
-  base: '/jobTracker'
+  base: '/jobTracker/'
 })
