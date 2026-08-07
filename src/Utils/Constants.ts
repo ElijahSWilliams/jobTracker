@@ -1,5 +1,5 @@
 
-export const baseURL = "https://jobtracker-oq8u.onrender.com/"
+export const baseURL = "https://jobtracker-oq8u.onrender.com"
 
 export type Jobs = {
     id: string;
