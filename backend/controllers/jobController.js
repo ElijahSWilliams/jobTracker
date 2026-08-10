@@ -13,7 +13,7 @@ const { join } = require("path");
 const createJob = (req, res, next) => {
     //get job info from req body
     const {company, position, status } = req.body;  
-    console.log("REQ BODY:", req.body)
+    /* console.log("REQ BODY:", req.body) */
 
     //create job
     Job.create({

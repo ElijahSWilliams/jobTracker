@@ -26,8 +26,12 @@ const createUser = (req, res, next) => {
     })
     .then((userInfo) => {
         const userWithoutPassword = userInfo.toObject();
-        delete userWithoutPassword.password;
-        res.status(201).send(userWithoutPassword);
+        delete userWithoutPassword.password; 
+        //create token here 
+        const token = jwt.sign({ _id: userInfo._id }, JWT_SECRET, {
+          expiresIn: "7d",
+        }); 
+        res.status(201).send({token});
     })
     .catch((err) => {
         if (err.name === "ValidationError") {
@@ -117,7 +121,7 @@ const getCurrentUser = (req, res, next) => {
         const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
           expiresIn: "7d",
         }); 
-        console.log(token)
+        /* console.log(token) */
         return res.status(200).send({ token }); // success
       })
       .catch((err) => { 

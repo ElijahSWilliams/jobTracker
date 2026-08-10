@@ -131,7 +131,7 @@ function App() {
         console.log('userData:', res);
         setCurrentUser(userData);
         localStorage.setItem("currentUser", JSON.stringify(userData));
-        /*  localStorage.setItem("jwt", res.token); */
+         localStorage.setItem("jwt", res.token);
         setIsSignedIn(true);
       })
 
