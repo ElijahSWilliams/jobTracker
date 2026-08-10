@@ -116,7 +116,8 @@ const getCurrentUser = (req, res, next) => {
         // create a JWS token
         const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
           expiresIn: "7d",
-        });
+        }); 
+        console.log(token)
         return res.status(200).send({ token }); // success
       })
       .catch((err) => { 
