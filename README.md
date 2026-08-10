@@ -32,10 +32,11 @@ This project was built to practice:
 - Add ability to create job entries ✅
 - Store data in localStorage or backend ✅
 - Drag and drop job statuses
-- Authentication system
+- Authentication system ✅
 - Filter and search jobs
-- Analytics 
--
+- Analytics  
+- Edit Profile
+
 
 ## 🧑‍💻 Author
 
