@@ -55,6 +55,9 @@ function Profile({ open, name, image, toggleSidebar, stats }: ProfileProps) {
         {/* DISPLAY USER NAME */}
         <h1 className="profile__name">{currentUser ? `Hello, ${currentUser.name}` : "Sign In/Up"}</h1>
 
+        {/* Edit BUtton */}
+        <button className="profile__edit-btn" onClick={(e) => console.log(e)}>Edit Profile</button>
+
         {/*  */}
         <div className="profile__stats">
           {stats.map((stat) => (
