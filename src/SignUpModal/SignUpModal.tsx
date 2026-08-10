@@ -22,7 +22,6 @@ export default function SignUpModal({ handleSignUp, toggleCloseModal }: SignUpMo
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         //make api call  
         handleSignUp({ name, email, password })
 

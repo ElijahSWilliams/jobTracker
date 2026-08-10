@@ -12,11 +12,12 @@ type ProfileProps = {
   image: string; /* Profile pic */
   open: boolean;
   toggleSidebar: () => void;
+  handleOpenEditUserModal: () => void;
 
   stats: Stat[];
 };
 
-function Profile({ open, name, image, toggleSidebar, stats }: ProfileProps) {
+function Profile({ open, name, image, toggleSidebar, handleOpenEditUserModal, stats }: ProfileProps) {
   const [profileImage, setProfileImage] = useState(image);
 
   const { currentUser } = useContext(CurrentUserContext);
@@ -56,7 +57,7 @@ function Profile({ open, name, image, toggleSidebar, stats }: ProfileProps) {
         <h1 className="profile__name">{currentUser ? `Hello, ${currentUser.name}` : "Sign In/Up"}</h1>
 
         {/* Edit BUtton */}
-        <button className="profile__edit-btn" onClick={(e) => console.log(e)}>Edit Profile</button>
+        <button className="profile__edit-btn" onClick={handleOpenEditUserModal}>Edit Profile</button>
 
         {/*  */}
         <div className="profile__stats">

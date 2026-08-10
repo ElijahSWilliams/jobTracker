@@ -14,6 +14,7 @@ import SignUpModal from "./SignUpModal/SignUpModal";
 import LoginModal from "./LoginModal/LoginModal";
 import { signUp, signIn, getCurrentUser, createJob, getJobs, deleteJob, updateJob } from "./Utils/Auth.js";
 import { CurrentUserContext } from "./Context/Context.js";
+import EditProfileModal from "./EditProfileModal/EditProfileModal.js";
 
 
 function App() {
@@ -74,6 +75,10 @@ function App() {
   const handleOpenLoginModal = () => {
     setActiveModal("login");
   };
+
+  const handleOpenEditProfileModal = () => {
+    setActiveModal("editProfile")
+  }
 
   const toggleModalClose = () => {
     setActiveModal("null");
@@ -205,6 +210,7 @@ function App() {
           toggleSidebar={toggleSidebar}
           image={profileImage}
           stats={statistics}
+          handleOpenEditUserModal={handleOpenEditProfileModal}
         />
 
         <div className="app__main">
@@ -261,6 +267,13 @@ function App() {
             <SignUpModal handleSignUp={handleSignUp} toggleCloseModal={toggleModalClose} />
           </Modal>
         )}
+
+        {activeModal === "editProfile" && (
+          <Modal onClose={toggleModalClose} title="Edit User Name">
+            <EditProfileModal />
+          </Modal>
+        )}
+
 
 
         {activeModal === "login" && (
