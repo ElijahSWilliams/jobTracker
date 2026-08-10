@@ -113,7 +113,7 @@ function App() {
     //make api call
     updateJob(jobID, updatedJob, token)
       .then((res) => {
-        console.log(res)
+
         setJobs((prevJobs) =>
           prevJobs.map((job) => (job._id === jobID ? updatedJob : job)),
         );
@@ -127,18 +127,16 @@ function App() {
     console.log("Signing You Up");
     signUp(userData)
       .then((res) => {
-        console.log('Data:', res);
-        console.log('userData:', res);
         setCurrentUser(userData);
         localStorage.setItem("currentUser", JSON.stringify(userData));
-         localStorage.setItem("jwt", res.token);
+        localStorage.setItem("jwt", res.token);
         setIsSignedIn(true);
       })
 
   }
 
   const handleLogin = (userData) => {
-    console.log("Loggin In", userData);
+
     signIn(userData)
       .then((res) => {
         localStorage.setItem("jwt", res.token); //set token 
@@ -160,8 +158,6 @@ function App() {
 
   const handleCreateJob = (jobData) => { //addJobModal
     const token = localStorage.getItem("jwt")
-    console.log("JobData:", jobData);
-    console.log("TOKEN:", token)
     //make api call
     createJob(jobData, token).then((newJob) => {
       console.log(newJob)
@@ -172,7 +168,7 @@ function App() {
       })
   }
 
-  /* Statistics. Passed to profile and Main */
+  /* Statistics. Passed to profile */
   const statistics = [
     {
       label: "Applications",

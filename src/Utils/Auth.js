@@ -33,7 +33,7 @@ export function getCurrentUser(token) { //take in token
 } 
 
 export function createJob(jobData, token) { 
-/*   console.log("token", token) */
+
   return fetch(`${baseURL}/jobs`, {
     method: "POST",
     headers: {
@@ -59,7 +59,7 @@ export function getJobs(token) {
 } 
 
 export function deleteJob(jobID, token) {
-  /* console.log(`jobID: ${jobID}, token: ${token}`) */ 
+
   return fetch(`${baseURL}/jobs/${jobID}`, { 
     method: "DELETE",
     headers: {
