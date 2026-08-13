@@ -44,6 +44,8 @@ Built by Elijah as part of a software engineering learning path and portfolio de
 
 ---
 
-## 💡 Note
+## 💡 Note 
+
+* Jobtracker Backend is hosted on Render and is inactive until a request is made. Please allow time for the server to spin up when making your first request. 🤓
 
 This project is actively being developed and will continue to evolve as new features are added.
