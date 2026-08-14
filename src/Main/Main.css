@@ -38,9 +38,9 @@
 
 /* BUTTON */
 .main__add-button {
-  position: relative;
+  position: relative; 
 
-  padding: 10px 10px;
+  padding: 8px 8px;
 
   background: linear-gradient(
     to bottom,
@@ -66,7 +66,39 @@
 
   margin-bottom: 10px;
   transition: all 0.2s ease;
-}  
+}   
+
+.main__filter-menu { 
+  position: relative;
+
+  padding: 5px 5px;
+
+  background: linear-gradient(
+    to bottom,
+    #f5f5f5 0%,
+    #d9d9d9 35%,
+    #b8b8b8 60%,
+    #e6e6e6 100%
+  );
+
+  color: #222;
+  font-size: 16px;
+  font-weight: 600;
+
+  border: 1px solid #8c8c8c;
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.2),
+    inset 0 2px 2px rgba(255, 255, 255, 0.9),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.15);
+
+  margin-bottom: 10px;
+  transition: all 0.2s ease;
+
+}
 
 .main__add-button-hide {
   display: none;
@@ -109,17 +141,30 @@
 
 .main__box-card {
   margin: 0 2px;
-  max-width: 110px;
-  min-width: 100px;
+  max-width: 160px;
+  min-width: 140px;
   height: 135px;
   border: 2px solid white;
   border-radius: 10px;
 
-  padding: 5px;
+  padding: 5px 10px 5px 5px; 
+ 
+} 
+
+.main__box-header {
+  margin-top: 0px;
+  margin-bottom: 13px;
 }
 
 .main__box-card-title {
-  text-align: center;
+  text-align: center; 
+  margin: 0px;
+  margin-bottom: 3px;
+} 
+
+.main__box-card-date {
+  margin: 0px;
+  margin-bottom: 5px;
 }
 
 /* Mobile */
