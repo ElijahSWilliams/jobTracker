@@ -44,7 +44,7 @@ function Main({ toggleModalOpen, viewJob, jobs }: MainProps) {
     const filteredJobsToRender = jobsToRender.filter((job) => {
         const search = searchTerm.toLowerCase(); //make searchTerm lowercase
 
-        return (job.company.toLowerCase().includes(search) || job.position.toLowerCase().includes(search)) //return jobs whose position or company match search.
+        return (job.company.toLowerCase().includes(search) || job.position.toLowerCase().includes(search) || job.status.toLowerCase().includes(search)) //return jobs whose position or company match search.
     })
 
     return (
