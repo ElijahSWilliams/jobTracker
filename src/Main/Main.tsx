@@ -62,7 +62,7 @@ function Main({ toggleModalOpen, viewJob, jobs }: MainProps) {
                     <option value="Rejected">Rejected</option>
                 </select>
                 {/* Search Filter */}
-                <input type="text" placeholder="Search by Position, Company, or Status" onChange={(e) => setSearchTerm(e.target.value)} className="" value={searchTerm}></input>
+                <input type="text" placeholder="Search by Position, Company, or Status" onChange={(e) => setSearchTerm(e.target.value)} className={currentUser ? "main__search" : "main__add-button-hide"} value={searchTerm}></input>
             </div>
 
             {/* Boxes */}

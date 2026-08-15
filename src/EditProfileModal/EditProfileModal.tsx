@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { CurrentUserContext } from "../Context/Context.js";
 
 type EditProfileModalProps = {};
 
 export default function EditProfileModal({ }: EditProfileModalProps) {
+
+    /* Get currentUser */
+    const { currentUser, setCurrentUser } = useContext(CurrentUserContext)
+
     /* State */
-    const [name, setName] = useState();
+    const [name, setName] = useState(currentUser.name); //set state to currentUser name
+
 
 
     const handleNameChange = (e) => setName(e.target.value)
@@ -20,7 +26,7 @@ export default function EditProfileModal({ }: EditProfileModalProps) {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <input className="signup__modal-form-input" type="text" placeholder="username" required value={name} onChange={handleNameChange}></input>
+                <input className="signup__modal-form-input" type="text" placeholder={name} value={name} required onChange={handleNameChange}></input>
                 <button type="submit">Confirm</button>
             </form>
         </div>
