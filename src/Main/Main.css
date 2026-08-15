@@ -69,7 +69,8 @@
 }   
 
 .main__filter-menu { 
-  position: relative;
+  position: relative; 
+  left: 40px;
 
   padding: 5px 5px;
 
