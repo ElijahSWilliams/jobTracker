@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import { CurrentUserContext } from "../Context/Context.js";
+import { updateName } from "../Utils/Auth.js"
 
 type EditProfileModalProps = {};
 
@@ -18,8 +19,17 @@ export default function EditProfileModal({ }: EditProfileModalProps) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-
-
+        //get token 
+        const token = localStorage.getItem("jwt")
+        //make api call
+        updateName(name, token)
+            .then((res) => {
+                setCurrentUser(res)
+                console.log(currentUser.name)
+            })
+            .catch((err) => {
+                console.error(err)
+            })
     }
 
 

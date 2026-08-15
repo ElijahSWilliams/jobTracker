@@ -85,4 +85,21 @@ export function updateJob(jobID, updatedJob, token) {
   .then((res) => {
     return checkResponse(res);
   })
+} 
+
+export function updateName(updatedName, token) {
+  console.log(`name: ${updatedName}, token: ${token}`)
+
+  return fetch(`${baseURL}/users/me`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`, 
+      "Content-Type": "application/json"
+    }, 
+    body: JSON.stringify({name: updatedName})// send new user name.
+  })
+  .then((res) => {
+    return checkResponse(res);
+  })
+
 }

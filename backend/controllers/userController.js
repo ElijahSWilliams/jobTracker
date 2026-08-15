@@ -64,7 +64,7 @@ const getCurrentUser = (req, res, next) => {
   const updateProfile = (req, res, next) => {
     const userId = req.user._id; // get ID
   
-    const { name } = req.body; // destructure fields that we want to change
+    const { name } = req.body; // look for name value in object.
   
     const updatedInfo = {}; // empty obj to store updated info
   
