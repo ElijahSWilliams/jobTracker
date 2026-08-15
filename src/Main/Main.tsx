@@ -14,6 +14,7 @@ type MainProps = {
 function Main({ toggleModalOpen, viewJob, jobs }: MainProps) {
     /* State */
     const [filter, setFilter] = useState("All");
+    const [searchTerm, setSearchTerm] = useState("");
 
     const { currentUser } = useContext(CurrentUserContext)
 
@@ -38,13 +39,20 @@ function Main({ toggleModalOpen, viewJob, jobs }: MainProps) {
 
     /* Render Jobs */
     const jobsToRender = jobFilters[filter] /* filter is state */
+    console.log(jobsToRender)
+    console.log(filter)
+    const filteredJobsToRender = jobsToRender.filter((job) => {
+        const search = searchTerm.toLowerCase(); //make searchTerm lowercase
 
+        return (job.company.toLowerCase().includes(search) || job.position.toLowerCase().includes(search)) //return jobs whose position or company match search.
+    })
 
     return (
         <div className="main">
             <div className="main__header">
                 {/* <h1 className="main__title">Stats</h1> */}
                 <button onClick={toggleModalOpen} className={currentUser ? "main__add-button" : "main__add-button-hide"}> + Add Job</button>
+                {/* Dropdown filter */}
                 <select value={filter} onChange={(e) => setFilter(e.target.value)} className={currentUser ? "main__filter-menu" : "main__add-button-hide"}>
                     <option value="All">All</option>
                     <option value="Saved" >Saved</option>
@@ -53,14 +61,14 @@ function Main({ toggleModalOpen, viewJob, jobs }: MainProps) {
                     <option value="Offer">Offer</option>
                     <option value="Rejected">Rejected</option>
                 </select>
+                {/* Search Filter */}
+                <input type="text" placeholder="search" onChange={(e) => setSearchTerm(e.target.value)} className="" value={searchTerm}></input>
             </div>
 
             {/* Boxes */}
             <div className="main__container">
-
-
                 <div>
-                    {jobsToRender.map((job) => (
+                    {filteredJobsToRender.map((job) => (
                         <button key={job.id} className="main__box-card" onClick={() => viewJob(job)}>
                             <h3 className="main__box-header">{job.company}</h3>
                             <p className="main__box-card-title">{job.position}</p>
