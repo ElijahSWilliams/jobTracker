@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { CurrentUserContext } from "../Context/Context.js";
-import { updateName } from "../Utils/Auth.js"
+import { updateName } from "../Utils/Auth.js";
 
 type EditProfileModalProps = {};
 
@@ -10,8 +10,8 @@ export default function EditProfileModal({ }: EditProfileModalProps) {
     const { currentUser, setCurrentUser } = useContext(CurrentUserContext)
 
     /* State */
-    const [name, setName] = useState(currentUser.name); //set state to currentUser name
-
+    const [name, setName] = useState(currentUser?.name ?? ""); //set state to currentUser name
+    console.log(currentUser)
 
 
     const handleNameChange = (e) => setName(e.target.value)
@@ -25,7 +25,7 @@ export default function EditProfileModal({ }: EditProfileModalProps) {
         updateName(name, token)
             .then((res) => {
                 setCurrentUser(res)
-                console.log(currentUser.name)
+                console.log(res.name)
             })
             .catch((err) => {
                 console.error(err)
