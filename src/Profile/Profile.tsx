@@ -54,7 +54,7 @@ function Profile({ open, name, image, toggleSidebar, handleOpenEditUserModal, st
         </label>
 
         {/* DISPLAY USER NAME */}
-        <h1 className="profile__name">{currentUser ? `Hello, ${currentUser.name}` : "Sign In/Up"}</h1>
+        <h1 className="profile__name">{currentUser ? `Hello!` : "Sign In/Up"}</h1>
 
         {/* Edit BUtton */}
         <button className={currentUser ? "profile__edit-btn" : "profile__edit-btn-hide"} onClick={handleOpenEditUserModal}>Edit Profile</button>
