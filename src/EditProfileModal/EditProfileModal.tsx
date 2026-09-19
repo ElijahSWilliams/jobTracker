@@ -37,7 +37,7 @@ export default function EditProfileModal({ }: EditProfileModalProps) {
         <div>
             <form onSubmit={handleSubmit}>
                 <input className="signup__modal-form-input" type="text" placeholder={name} value={name} required onChange={handleNameChange}></input>
-                <button type="submit">Confirm</button>
+                <button type="submit" className>Confirm</button> {/* Add classname */}
             </form>
         </div>
     );
