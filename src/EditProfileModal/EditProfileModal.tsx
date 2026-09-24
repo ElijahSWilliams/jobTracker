@@ -24,8 +24,9 @@ export default function EditProfileModal({ }: EditProfileModalProps) {
         //make api call
         updateName(name, token)
             .then((res) => {
-                setCurrentUser(res)
-                console.log(res.name)
+                setCurrentUser(res);
+                localStorage.setItem("currentUser", JSON.stringify(res))
+                setName(res.name)
             })
             .catch((err) => {
                 console.error(err)
@@ -37,7 +38,7 @@ export default function EditProfileModal({ }: EditProfileModalProps) {
         <div>
             <form onSubmit={handleSubmit}>
                 <input className="signup__modal-form-input" type="text" placeholder={name} value={name} required onChange={handleNameChange}></input>
-                <button type="submit" className>Confirm</button> {/* Add classname */}
+                <button type="submit" >Confirm</button> {/* Add classname */}
             </form>
         </div>
     );

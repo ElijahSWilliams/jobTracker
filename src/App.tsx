@@ -15,13 +15,14 @@ import LoginModal from "./LoginModal/LoginModal";
 import { signUp, signIn, getCurrentUser, createJob, getJobs, deleteJob, updateJob } from "./Utils/Auth.js";
 import { CurrentUserContext } from "./Context/Context.js";
 import EditProfileModal from "./EditProfileModal/EditProfileModal.js";
+import ImportModal from "./ImportModal/ImportModal";
 
 
 function App() {
   const [sidebarOpen, setSideBarOpen] = useState(true);
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [selectedJob, setSelectedJob] = useState<Jobs | null>(null);
-  const [isSignedIn, setIsSignedIn] = useState(false); //user sign in state 
+  const [isSignedIn, setIsSignedIn] = useState(false); //user sign in state  
   const [currentUser, setCurrentUser] = useState(() => {
     const storedUser = localStorage.getItem("currentUser");
     return storedUser ? JSON.parse(storedUser) : null;
@@ -78,6 +79,10 @@ function App() {
 
   const handleOpenEditProfileModal = () => {
     setActiveModal("editProfile")
+  }
+
+  const handleOpenImportModal = () => {
+    setActiveModal('importModal')
   }
 
   const toggleModalClose = () => {
@@ -274,11 +279,15 @@ function App() {
           </Modal>
         )}
 
-
-
         {activeModal === "login" && (
           <Modal onClose={toggleModalClose} title="Login">
             <LoginModal handleLogin={handleLogin} toggleCloseModal={toggleModalClose} />
+          </Modal>
+        )}
+
+        {activeModal === "importModal" && (
+          <Modal onClose={toggleModalClose} title="Import">
+            <ImportModal ></ImportModal>
           </Modal>
         )}
       </CurrentUserContext.Provider>
