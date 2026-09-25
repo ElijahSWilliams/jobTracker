@@ -15,7 +15,7 @@ import LoginModal from "./LoginModal/LoginModal";
 import { signUp, signIn, getCurrentUser, createJob, getJobs, deleteJob, updateJob } from "./Utils/Auth.js";
 import { CurrentUserContext } from "./Context/Context.js";
 import EditProfileModal from "./EditProfileModal/EditProfileModal.js";
-
+import ImportModal from "./ImportModal/ImportModal.js";
 
 function App() {
   const [sidebarOpen, setSideBarOpen] = useState(true);
@@ -78,6 +78,10 @@ function App() {
 
   const handleOpenEditProfileModal = () => {
     setActiveModal("editProfile")
+  }
+
+  const handleOpenImportModal = () => {
+    setActiveModal("import");
   }
 
   const toggleModalClose = () => {
@@ -274,11 +278,15 @@ function App() {
           </Modal>
         )}
 
-
-
         {activeModal === "login" && (
           <Modal onClose={toggleModalClose} title="Login">
             <LoginModal handleLogin={handleLogin} toggleCloseModal={toggleModalClose} />
+          </Modal>
+        )}
+
+        {activeModal === "import" && (
+          <Modal onClose={toggleModalClose} title="Import">
+            <ImportModal onClose={toggleModalClose} />
           </Modal>
         )}
       </CurrentUserContext.Provider>
