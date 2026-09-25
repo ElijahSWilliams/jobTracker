@@ -88,7 +88,7 @@ export function updateJob(jobID, updatedJob, token) {
 } 
 
 export function updateName(updatedName, token) {
-  console.log(`name: ${updatedName}, token: ${token}`)
+  /* console.log(`name: ${updatedName}, token: ${token}`) */
 
   return fetch(`${baseURL}/users/me`, {
     method: "PATCH",

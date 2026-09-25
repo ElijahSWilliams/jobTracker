@@ -52,6 +52,7 @@ function Main({ toggleModalOpen, viewJob, jobs }: MainProps) {
             <div className="main__header">
                 {/* <h1 className="main__title">Stats</h1> */}
                 <button onClick={toggleModalOpen} className={currentUser ? "main__add-button" : "main__add-button-hide"}> + Add Job</button>
+                <button onClick={toggleModalOpen} className={currentUser ? "main__add-button" : "main__add-button-hide"}> + Import</button>
                 {/* Dropdown filter */}
                 <select value={filter} onChange={(e) => setFilter(e.target.value)} className={currentUser ? "main__filter-menu" : "main__add-button-hide"}>
                     <option value="All">All</option>
