@@ -1,10 +1,24 @@
+import { useState } from "react";
 import "./ImportModal.css";
 
 type ImportModalProps = {
     onClose: () => void;
 };
 
+
 export default function ImportModal({ onClose }: ImportModalProps) {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("")
+
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value)
+    }
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value)
+    }
+
+
     return (
         <div>
             <form onSubmit={() => alert("Open")}>

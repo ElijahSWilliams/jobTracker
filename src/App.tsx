@@ -233,6 +233,7 @@ function App() {
                   viewJob={viewJob}
                   toggleModalOpen={toggleModalOpen}
                   jobs={jobs}
+                  handleOpenImportModal={handleOpenImportModal}
                 />
               }
             />
