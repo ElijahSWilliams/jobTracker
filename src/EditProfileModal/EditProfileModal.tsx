@@ -25,6 +25,8 @@ export default function EditProfileModal({ }: EditProfileModalProps) {
         updateName(name, token)
             .then((res) => {
                 setCurrentUser(res)
+                localStorage.setItem("currentUser", JSON.stringify(res));
+                setName(res.name)
                 console.log(res.name)
             })
             .catch((err) => {
