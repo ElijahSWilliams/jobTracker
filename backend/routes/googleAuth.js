@@ -1,11 +1,18 @@
 const router = require("express").Router(); 
-const {oauth2client, scopes} = require("../utils/googleApis"); 
+const {JWT_SECRET} = require("../utils/config"); 
+const {auth} = require("../middlewares/auth")
+const {oauth2Client, scopes} = require("../utils/googleApis"); 
 
 /* Routes */
-router.get("/google", (req, res) => {
-    const authURL = oauth2client.generateAuthUrl({
+router.get("/google", auth, (req, res) => { 
+    const state = jwt.sign({userId: req.user._id.toString()}, JWT_SECRET, 
+    {expiresIn: "10m"}
+    )
+
+    const authURL = oauth2Client.generateAuthUrl({
         access_type: "offline", 
-        scope: scopes
+        scope: scopes, 
+        state,
     }); 
 
     res.redirect(authURL)
