@@ -20,10 +20,13 @@ export default function ImportModal({ onClose }: ImportModalProps) {
         setPassword(e.target.value)
     }
 
+    const handleGoogleImport = () => {
+        window.location.href = "http://localhost:2001/jobTracker/auth/google";
+    }
 
     return (
         <div>
-            <button className="importModal-btn" onClick={() => alert("OAuth Implementing")}>Import with Google Sheets</button>
+            <button className="importModal-btn" onClick={handleGoogleImport}>Import with Google Sheets</button>
             {/*  <form onSubmit={() => alert("Open")}>
                 <input className="signup__modal-form-input" type="text" placeholder="email" required value={email} onChange={handleEmailChange}></input>
                 <input className="signup__modal-form-input" type="password" placeholder="password" required value={password} onChange={handlePasswordChange}></input>

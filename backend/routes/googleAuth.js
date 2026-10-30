@@ -1,7 +1,7 @@
 const router = require("express").Router(); 
 const {JWT_SECRET} = require("../utils/config");  
 const jwt = require("jsonwebtoken");
-const {auth} = require("../middlewares/auth")
+const { auth } = require("../middlewares/auth")
 const {oauth2Client, scopes} = require("../utils/googleApis"); 
 const {BadRequestError} = require("../utils/BadRequestError")
 
@@ -26,30 +26,38 @@ router.get("/google/callback", async (req, res, next) => {
     
 
     if (error) {
-        return BadRequestError ("Google Authentication Error: " + error);
+        return next(BadRequestError("Google Authentication Error: " + error));
     } 
 
-    if (!code || !state) {
+    if (!code || !state) { //if no code or state values
         return next(new BadRequestError("Missing code or state in callback"));
     }
+    let payload; 
 
-    const payload = jwt.verify(state, JWT_SECRET); 
+    try {
+     payload = jwt.verify(state, JWT_SECRET); //payload contains verified JWT and state
+    } catch (err) {
+        return next(new BadRequestError("Invalid OAuth state"));
+    }
 
-    if (!payload.userId) {
+    if (!payload.userId) { //if no userID in payload
         return next(new BadRequestError("Invalid OAuth state"));
     } 
 
-    const {tokens} = await oauth2Client.getToken(code); 
-
-    //temporarily store tokens in memory for demonstration purposes
+    const {tokens} = await oauth2Client.getToken(code);  
     oauth2Client.setCredentials(tokens);
 
+/*     res.status(200).json({message: "Google Authentication Successful"})  */
+    
+    return res.redirect('http://localhost:2001/jobTracker/auth/google');
 
-    return res.status(200).json({message: "Google Authentication Successful"}) 
+
 
 } catch (error) {
     return next(error);
 }
-} 
+    
+    })
+
 
 module.exports = router;
