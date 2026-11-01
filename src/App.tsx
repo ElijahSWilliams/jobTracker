@@ -155,6 +155,8 @@ function App() {
         const token = localStorage.getItem("jwt") //get token
         localStorage.setItem("currentUser", JSON.stringify(user))
         setIsSignedIn(true);
+        //redirect user to home 
+        window.location.href = "/";
         //make api call for jobs 
         getJobs(token).then((jobs) => {
           localStorage.setItem("jobs", JSON.stringify(jobs));
