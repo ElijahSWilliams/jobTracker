@@ -3,30 +3,36 @@ const {JWT_SECRET} = require("../utils/config");
 const jwt = require("jsonwebtoken");
 const { auth } = require("../middlewares/auth")
 const {oauth2Client, scopes} = require("../utils/googleApis"); 
-const {BadRequestError} = require("../utils/BadRequestError")
+const { BadRequestError } = require("../utils/BadRequestError");
 
 /* Routes */
-router.get("/google", auth, (req, res) => { 
-    const state = jwt.sign({userId: req.user._id.toString()}, JWT_SECRET, 
+router.get("/google", (req, res) => {  
+    console.log("GOOGLEEEE AUTH TEST")
+    //create a JWT token with the user ID and expiration time
+    const state = jwt.sign({}, JWT_SECRET, 
     {expiresIn: "10m"}
     )
 
+    //build the Google OAuth URL with the state parameter
     const authURL = oauth2Client.generateAuthUrl({
         access_type: "offline", 
         scope: scopes, 
         state,
-    }); 
+        redirect_uri: process.env.GOOGLE_REDIRECT_URI
+    });  
 
+
+    console.log(authURL)
+    //redirect user to Google OAuth URL
     res.redirect(authURL)
 })  
 
 router.get("/google/callback", async (req, res, next) => {
     try {
-        const { code, state, error } = req.query;
+        const { code, state, error } = req.query; //get code, state, and error from query parameters
     
-
-    if (error) {
-        return next(BadRequestError("Google Authentication Error: " + error));
+    if (error) { //if error is present in query parameters
+        return next(BadRequestError("Google Authentication Error: " + error)); //return error to next middleware
     } 
 
     if (!code || !state) { //if no code or state values
@@ -40,10 +46,10 @@ router.get("/google/callback", async (req, res, next) => {
         return next(new BadRequestError("Invalid OAuth state"));
     }
 
-    if (!payload.userId) { //if no userID in payload
+  /*   if (!payload.userId) { //if no userID in payload
         return next(new BadRequestError("Invalid OAuth state"));
     } 
-
+ */
     const {tokens} = await oauth2Client.getToken(code);  
     oauth2Client.setCredentials(tokens);
 

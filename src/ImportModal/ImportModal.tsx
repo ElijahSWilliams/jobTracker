@@ -21,7 +21,7 @@ export default function ImportModal({ onClose }: ImportModalProps) {
     }
 
     const handleGoogleImport = () => {
-        window.location.href = "http://localhost:2001/jobTracker/auth/google";
+        window.location.href = "http://localhost:3005/auth/google";
     }
 
     return (
