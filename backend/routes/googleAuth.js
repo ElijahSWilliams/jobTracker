@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const { auth } = require("../middlewares/auth")
 const {oauth2Client, scopes} = require("../utils/googleApis"); 
 const { BadRequestError } = require("../utils/BadRequestError"); 
-const { readSheet } = require("../utils/sheetsAPI");
+const { readSheet, listSpreadsheets } = require("../utils/sheetsAPI");
 
 /* Routes */ 
 
@@ -14,7 +14,9 @@ router.get("/google", (req, res) => {
     //create a JWT token with the user ID and expiration time
     const state = jwt.sign({}, JWT_SECRET, 
     {expiresIn: "10m"}
-    )
+    ) 
+
+    console.log(`State in /google route: ${state}`)
 
     //build the Google OAuth URL with the state parameter
     const authURL = oauth2Client.generateAuthUrl({
@@ -33,8 +35,8 @@ router.get("/google", (req, res) => {
 //route back from Google OAuth with code and state parameters
 router.get("/google/callback", async (req, res, next) => {
     try {
-        const { code, state, error, spreadsheetId } = req.query; //get code, state, and error from query parameters
-    
+        const { code, state, error, range, spreadsheetId } = req.query; //get code, state, and error from query parameters
+        console.log(`State: ${state}`)
     if (error) { //if error is present in query parameters
         return next(BadRequestError("Google Authentication Error: " + error)); //return error to next middleware
     } 
@@ -51,24 +53,20 @@ router.get("/google/callback", async (req, res, next) => {
     }
 
     const {tokens} = await oauth2Client.getToken(code);  
-    oauth2Client.setCredentials(tokens); 
+        oauth2Client.setCredentials(tokens); 
 
-    //call read sheet function from sheetsAPI.js to read data from Google Sheet  
-    if (!spreadsheetId) {
-        return next(new BadRequestError("Missing spreadsheetId in callback"));
-    }
-
-     const sheetRange = range || 'Sheet1!A1:D10';   
+        //call read sheet function from sheetsAPI.js to read data from Google Sheet  
+        /*   if (!spreadsheetId) {
+            return next(new BadRequestError("Missing spreadsheetId in callback"));
+        }
+     */
      
-
-    try {
-        const rows = await readSheet(oauth2Client, spreadsheetId, sheetRange);
-        // Use rows as needed, e.g.:
-        res.json({ data: rows });
-    } catch (error) {
-        return next(error);
-    }
-    
+        const spreadsheets = await listSpreadsheets(oauth2Client); //list all spreadsheets in user's Google Drive 
+        const data = JSON.parse(JSON.stringify(spreadsheets)); //convert spreadsheets to JSON object
+        const firstSpreadsheetId = data.spreadsheets[0].id; //get first spreadsheet ID 
+        console.log(firstSpreadsheetId)
+        
+        res.json({ spreadsheets }); //return list of spreadsheets to client
    /*  return res.redirect('http://localhost:2001/jobTracker/auth/google'); */
 
 } catch (error) {

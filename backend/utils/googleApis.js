@@ -6,9 +6,9 @@ const oauth2Client = new google.auth.OAuth2(
   process.env.GOOGLE_REDIRECT_URI
 ); 
 
-
 const scopes = [
-    "https://www.googleapis.com/auth/spreadsheets.readonly"
+    "https://www.googleapis.com/auth/spreadsheets.readonly", 
+    "https://www.googleapis.com/auth/drive.readonly"
   ];
 
 module.exports = {oauth2Client, scopes}
