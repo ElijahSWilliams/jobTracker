@@ -35,19 +35,23 @@ router.get("/google", (req, res) => {
 //route back from Google OAuth with code and state parameters
 router.get("/google/callback", async (req, res, next) => {
     try {
-        const { code, state, error, range, spreadsheetId } = req.query; //get code, state, and error from query parameters
-        console.log(`State: ${state}`)
-    if (error) { //if error is present in query parameters
-        return next(BadRequestError("Google Authentication Error: " + error)); //return error to next middleware
-    } 
+        const { code, state, error, range } = req.query; //get code, state, and error from query parameters 
+        
+        if (error) { //if error is present in query parameters
+            return next(BadRequestError("Google Authentication Error: " + error)); //return error to next middleware
+        } 
+        
+        if (!code || !state) { //if no code or state values
+            return next(new BadRequestError("Missing code or state in callback"));
+        }
+        let payload; 
+        
+        try {
+            payload = jwt.verify(state, JWT_SECRET); //payload contains verified JWT and state
+            const spreadsheetId = payload.spreadsheetId; //get spreadsheetId from payload
+            console.log(`payload: ${JSON.stringify(payload)}`);
+            con
 
-    if (!code || !state) { //if no code or state values
-        return next(new BadRequestError("Missing code or state in callback"));
-    }
-    let payload; 
-
-    try {
-     payload = jwt.verify(state, JWT_SECRET); //payload contains verified JWT and state
     } catch (err) {
         return next(new BadRequestError("Invalid OAuth state"));
     }
@@ -56,14 +60,15 @@ router.get("/google/callback", async (req, res, next) => {
         oauth2Client.setCredentials(tokens); 
 
         //call read sheet function from sheetsAPI.js to read data from Google Sheet  
-        /*   if (!spreadsheetId) {
+         /*  if (!spreadsheetId) {
             return next(new BadRequestError("Missing spreadsheetId in callback"));
-        }
-     */
+        } */
+    
      
         const spreadsheets = await listSpreadsheets(oauth2Client); //list all spreadsheets in user's Google Drive 
-        const data = JSON.parse(JSON.stringify(spreadsheets)); //convert spreadsheets to JSON object
-        const firstSpreadsheetId = data.spreadsheets[0].id; //get first spreadsheet ID 
+        const data = JSON.parse(JSON.stringify(spreadsheets)); //convert spreadsheets to JSON object 
+        console.log(`data: ${JSON.stringify(data)}`); //log data to console
+        const firstSpreadsheetId = data[0].id; //get first spreadsheet ID 
         console.log(firstSpreadsheetId)
         
         res.json({ spreadsheets }); //return list of spreadsheets to client
