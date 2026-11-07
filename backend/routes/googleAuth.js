@@ -15,7 +15,6 @@ const { redirect } = require("react-router-dom");
 //route user to Google OAuth URL for authentication
 router.get("/google", (req, res) => {  
 
-
     //create a JWT token with the user ID and expiration time
     const state = jwt.sign({}, JWT_SECRET, 
     {expiresIn: "10m"}
@@ -38,8 +37,8 @@ router.get("/google", (req, res) => {
 //route back from Google OAuth with code and state parameters
 router.get("/google/callback", async (req, res, next) => {
     const { code, state, error, range } = req.query; //get code, state, and error from query parameters sent by Google OAuth
-
-    const frontendUrl = process.env.GOOGLE_REDIRECT_URI; //get frontend URL from environment variables
+    console.log(`Req.QUery: ${JSON.stringify(req.query)}`); //log query parameters to console
+    const frontendUrl = process.env.FRONTEND_URL || "" ; //get frontend URL from environment variable or default to localhost
     
     try {
         
@@ -75,7 +74,6 @@ router.get("/google/callback", async (req, res, next) => {
 
         /* ${process.env.GOOGLE_REDIRECT_URI}/some-path?spreadsheetId=${encodeURIComponent(firstSpreadsheetId)};  */
 
-        res.json({ spreadsheets });  //return list of spreadsheets to client 
         return res.redirect(`${frontendUrl}?spreadsheetId=${encodeURIComponent(firstSpreadsheetId)}`);  //redirect to frontend with spreadsheet ID as query parameter
 } catch (error) {
 
