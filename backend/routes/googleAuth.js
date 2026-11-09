@@ -8,12 +8,15 @@ const { readSheet, listSpreadsheets } = require("../utils/sheetsAPI");
 const { redirect } = require("react-router-dom");
 
 
-/* Variables */
-/* const frontendUrl = process.env.GOOGLE_REDIRECT_URI;  */
+/* Global Variables */ 
+const isLocal = req.headers.host.includes("localhost"); 
+const redirectURI = isLocal ? process.env.GOOGLE_REDIRECT_URI_LOCAL : process.env.GOOGLE_REDIRECT_URI_LIVE;
+
+
 /* Routes */ 
 
-//route user to Google OAuth URL for authentication
-router.get("/google", (req, res) => {  
+//route user to Google OAuth URL for authentication (Starts the OAuth flow)
+router.get("/google", (req, res) => {   
 
     //create a JWT token with the user ID and expiration time
     const state = jwt.sign({}, JWT_SECRET, 
@@ -27,18 +30,18 @@ router.get("/google", (req, res) => {
         access_type: "offline", 
         scope: scopes, 
         state,
-        redirect_uri: process.env.GOOGLE_REDIRECT_URI
+        redirect_uri: redirectURI
     });  
     /* console.log(authURL) */
     //redirect user to Google OAuth URL
     res.redirect(authURL)
 })  
 
-//route back from Google OAuth with code and state parameters
+//route back from Google OAuth with code and state parameters (Handles the callback from Google OAuth)
 router.get("/google/callback", async (req, res, next) => {
     const { code, state, error, range } = req.query; //get code, state, and error from query parameters sent by Google OAuth
     console.log(`Req.QUery: ${JSON.stringify(req.query)}`); //log query parameters to console
-    const frontendUrl = process.env.FRONTEND_URL || "" ; //get frontend URL from environment variable or default to localhost
+    const frontendUrl = isLocal ? process.env.FRONTEND_URL_LOCAL : process.env.FRONTEND_URL_LIVE; //get frontend URL from environment variable or default to localhost
     
     try {
         
