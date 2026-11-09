@@ -6,7 +6,7 @@ import Profile from "./Profile/Profile";
 import AddJob from "./addJobModal/AddJob";
 import profileImage from "./assets/hero.png";
 import { Routes, Route } from "react-router-dom";
-import { initialJobs, type Jobs } from "./Utils/Constants";
+import { type Jobs } from "./Utils/Constants";
 import Modal from "./Modal/Modal";
 import JobModal from "./JobModal/JobModal";
 import EditModal from "./EditModal/EditModal";
@@ -155,6 +155,8 @@ function App() {
         const token = localStorage.getItem("jwt") //get token
         localStorage.setItem("currentUser", JSON.stringify(user))
         setIsSignedIn(true);
+        //redirect user to home 
+        window.location.href = "/";
         //make api call for jobs 
         getJobs(token).then((jobs) => {
           localStorage.setItem("jobs", JSON.stringify(jobs));

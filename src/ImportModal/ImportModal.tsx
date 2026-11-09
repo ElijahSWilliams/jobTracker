@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./ImportModal.css";
 
+/*  */
+
 type ImportModalProps = {
     onClose: () => void;
 };
@@ -18,14 +20,18 @@ export default function ImportModal({ onClose }: ImportModalProps) {
         setPassword(e.target.value)
     }
 
+    const handleGoogleImport = () => {
+        window.location.href = "http://localhost:3005/auth/google";
+    }
 
     return (
         <div>
-            <form onSubmit={() => alert("Open")}>
+            <button className="importModal-btn" onClick={handleGoogleImport}>Import with Google Sheets</button>
+            {/*  <form onSubmit={() => alert("Open")}>
                 <input className="signup__modal-form-input" type="text" placeholder="email" required value={email} onChange={handleEmailChange}></input>
                 <input className="signup__modal-form-input" type="password" placeholder="password" required value={password} onChange={handlePasswordChange}></input>
-                <button type="submit">Import</button>
-            </form>
+                <button type="submit">Import with Google Sheets</button>
+            </form> */}
         </div>
     );
 }

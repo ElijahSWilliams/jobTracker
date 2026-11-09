@@ -1,13 +1,15 @@
 //centralized routes
 const router = require("express").Router();
 const userRouter = require("./users");
-const jobRouter = require("./jobs");
+const jobRouter = require("./jobs"); 
+const googleAuthRouter = require("./googleAuth");
 const { createUser, login } = require("../controllers/userController");
 const { validateUser, validateLogin } = require("../middlewares/validation");
 
 
 router.use("/users", userRouter);   
-router.use("/jobs", jobRouter);
+router.use("/jobs", jobRouter); 
+router.use("/auth", googleAuthRouter)
 
 router.post("/signup", validateUser, createUser);
 router.post("/signin", validateLogin, login); 
