@@ -9,22 +9,28 @@ const { redirect } = require("react-router-dom");
 
 
 /* Global Variables */ 
-const isLocal = req.headers.host.includes("localhost"); 
-const redirectURI = isLocal ? process.env.GOOGLE_REDIRECT_URI_LOCAL : process.env.GOOGLE_REDIRECT_URI_LIVE;
 
+/* FUNCTIONS */ 
+function isLocalRequest(req) {
+    return req.headers.host && req.headers.host.includes("localhost");
+}
 
 /* Routes */ 
 
 //route user to Google OAuth URL for authentication (Starts the OAuth flow)
 router.get("/google", (req, res) => {   
+    const isLocal = isLocalRequest(req); //check if request is from localhost 
+    const redirectURI = isLocal ? process.env.GOOGLE_REDIRECT_URI_LOCAL : process.env.GOOGLE_REDIRECT_URI_LIVE; 
+    console.log(`Redirect URI in /google route: ${redirectURI}`)
 
     //create a JWT token with the user ID and expiration time
     const state = jwt.sign({}, JWT_SECRET, 
-    {expiresIn: "10m"}
+    {expiresIn: "7d"}
     ) 
 
     console.log(`State in /google route: ${state}`)
-
+    console.log(`Redirect URI: ${redirectURI}`)
+    
     //build the Google OAuth URL with the parameters
     const authURL = oauth2Client.generateAuthUrl({
         access_type: "offline", 
@@ -39,9 +45,12 @@ router.get("/google", (req, res) => {
 
 //route back from Google OAuth with code and state parameters (Handles the callback from Google OAuth)
 router.get("/google/callback", async (req, res, next) => {
+
     const { code, state, error, range } = req.query; //get code, state, and error from query parameters sent by Google OAuth
-    console.log(`Req.QUery: ${JSON.stringify(req.query)}`); //log query parameters to console
+    /* console.log(`Req.QUery: ${JSON.stringify(req.query)}`); */ //log query parameters to console 
+    const isLocal = isLocalRequest(req); //check if request is from localhost
     const frontendUrl = isLocal ? process.env.FRONTEND_URL_LOCAL : process.env.FRONTEND_URL_LIVE; //get frontend URL from environment variable or default to localhost
+    console.log(`frontendURL: ${frontendUrl}`)
     
     try {
         
@@ -61,11 +70,12 @@ router.get("/google/callback", async (req, res, next) => {
           
            /*  console.log(`payload: ${JSON.stringify(payload)}`); */
 
-    } catch (err) {
+    } catch (err) { 
+        console.log(`err: ${err}`)
         return next(new BadRequestError("Invalid OAuth state"));
     }
 
-    const {tokens} = await oauth2Client.getToken(code);  
+    const {tokens} = await oauth2Client.getToken({code, redirect_uri: isLocal ? process.env.GOOGLE_REDIRECT_URI_LOCAL : process.env.GOOGLE_REDIRECT_URI_LIVE}); //get tokens from Google OAuth using code and redirect URI
         oauth2Client.setCredentials(tokens);  
      
         const spreadsheets = await listSpreadsheets(oauth2Client); //list all spreadsheets in user's Google Drive 
