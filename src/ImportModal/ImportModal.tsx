@@ -12,6 +12,8 @@ export default function ImportModal({ onClose }: ImportModalProps) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
 
+    const importPath = isLocal ? "http://localhost:3005/auth/google" : "https://job-tracker-mern.onrender.com/auth/google"
+
     const handleEmailChange = (e) => {
         setEmail(e.target.value)
     }
